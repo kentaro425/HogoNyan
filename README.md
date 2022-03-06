@@ -34,7 +34,9 @@
 
 
 ## 設計書
-<...>
+- [ER図]
+- [テーブル定義書]
+- [アプリケーション詳細設計]
 
 ## チャレンジ要素一覧
 <https://docs.google.com/spreadsheets/d/1YOq8Xv2cP50PhKxzqvHPLjVrY0AwgwON9wuS6M7SsQI/edit?usp=sharing>
