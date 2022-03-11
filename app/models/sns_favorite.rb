@@ -1,0 +1,2 @@
+class SnsFavorite < ApplicationRecord
+end
