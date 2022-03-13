@@ -1,2 +1,27 @@
-<h1>Public::Users#requester_show</h1>
-<p>Find me in app/views/public/users/requester_show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-7 mx-auto">
+      <h3><%= current_user.nickname %> さまのマイページ</h3>
+      <table class="table">
+        <tr>
+          <td><%= link_to "会員情報の編集", edit_user_path %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "募集者情報の登録/編集", requester_edit_user_path %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "お問い合わせ一覧", rooms_index_path %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "里親募集の猫を登録", new_request_path %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "保護猫を掲載したい方のメニューに切り替える", home_user_path %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "退会手続き", unsubscribe_user_path %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

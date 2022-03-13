@@ -1,0 +1,6 @@
+ja:
+  enums:
+    user:
+      status:
+        common: "一般"
+        requester: "保護活動者"
