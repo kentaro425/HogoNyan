@@ -13,6 +13,23 @@
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
             <li class="mx-5 mt-5">ようこそ、<%= current_user.nickname %>さん！</li>
+            <% if current_user.status == true %>
+              <li>
+                <%= link_to "SNSへ", sns_home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "マイページ", home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "メッセージ", rooms_index_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "お気に入り", favorites_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary nav-link mx-2 text-dark" %>
+              </li>
+            <% end %>
             <li>
               <%= link_to "SNSへ", sns_home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
             </li>
