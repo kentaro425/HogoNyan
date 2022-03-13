@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get 'sns_home', to: 'users#sns_show'
         get 'requester_edit'
         get 'sns_edit'
+        patch 'requester_update'
         get 'unsubscribe'
         patch 'withdraw'
         get 'favorites'

@@ -11,25 +11,24 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-          <% if user_signed_in? %>
+          <% if user_signed_in? && current_user.status == 'requester' %>
             <li class="mx-5 mt-5">ようこそ、<%= current_user.nickname %>さん！</li>
-            <% if current_user.status == true %>
-              <li>
-                <%= link_to "SNSへ", sns_home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
-              </li>
-              <li>
-                <%= link_to "マイページ", home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
-              </li>
-              <li>
-                <%= link_to "メッセージ", rooms_index_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
-              </li>
-              <li>
-                <%= link_to "お気に入り", favorites_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
-              </li>
-              <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary nav-link mx-2 text-dark" %>
-              </li>
-            <% end %>
+            <li>
+              <%= link_to "SNSへ", posts_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+            </li>
+            <li>
+              <%= link_to "募集者用マイページ", requester_home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+            </li>
+            <li>
+              <%= link_to "保護猫の登録", new_request_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+            </li>
+            <li>
+              <%= link_to "メッセージ", rooms_index_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary nav-link mx-2 text-dark" %>
+            </li>
+          <% elsif user_signed_in? %>
             <li>
               <%= link_to "SNSへ", sns_home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
             </li>
