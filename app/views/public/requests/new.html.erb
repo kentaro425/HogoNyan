@@ -1,2 +1,62 @@
-<h1>Public::Requests#new</h1>
-<p>Find me in app/views/public/requests/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h3>里親募集情報を登録</h3>
+      <%= form_with model: @request, url: requests_path, local: true  do |f| %>
+        <div class="form-group">
+          <%= f.label :募集タイトル %><%= f.text_field :title %>
+        </div>
+        <div class="form-group">
+          <%= f.label :猫種 %><%= f.select :breed, Request.breeds.keys, {prompt: "選択してください"} %>
+        </div>
+        <div class="form-group">
+          <%= f.label :毛の色／柄 %><%= f.text_field :pattern %>
+        </div>
+        <div class="form-group">
+          <%= f.label :サイズ %><%= f.select :size, Request.sizes.keys, {prompt: "選択してください"} %><br/>
+          <p>※小型：成猫体重3.5kg未満、中型：成猫体重4.5kg未満、大型：成猫体重4.5kg以上</p>
+        </div>
+        <div class="form-group">
+          <%= f.label :性別 %><br>
+          <%= f.radio_button :sex, Request.sexes.key(0) %>
+          <%= f.label :sex, Request.sexes_i18n[:unknown] %>
+          <%= f.radio_button :sex, Request.sexes.key(1) %>
+          <%= f.label :sex, Request.sexes_i18n[:male]%>
+          <%= f.radio_button :sex, Request.sexes.key(2) %>
+          <%= f.label :sex, Request.sexes_i18n[:female]%>
+        </div>
+        <div class="form-group">
+          <%= f.label :年齢 %><%= f.text_field :age, placeholder: "おおよその年齢" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :ワクチン接種の有無 %><br>
+          <%= f.radio_button :vaccine, Request.vaccines.key(0) %>
+          <%= f.label :vaccine, Request.vaccines_i18n[:unknown] %>
+          <%= f.radio_button :vaccine, Request.vaccines.key(1) %>
+          <%= f.label :vaccine, Request.vaccines_i18n[:done]%>
+          <%= f.radio_button :vaccine, Request.vaccines.key(2) %>
+          <%= f.label :vaccine, Request.vaccines_i18n[:not_yet]%>
+        </div>
+        <div class="form-group">
+          <%= f.label :不妊手術（去勢・避妊）の有無  %><br>
+          <%= f.radio_button :surgery, Request.surgeries.key(0) %>
+          <%= f.label :surgery, Request.surgeries_i18n[:unknown] %>
+          <%= f.radio_button :surgery, Request.surgeries.key(1) %>
+          <%= f.label :surgery, Request.surgeries_i18n[:done]%>
+          <%= f.radio_button :surgery, Request.surgeries.key(2) %>
+          <%= f.label :surgery, Request.surgeries_i18n[:not_yet]%>
+        </div>
+        <div class="form-group">
+          <%= f.label :猫の現在所在地 %><br>
+          <%=  f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "--選択してください--"} %>
+        </div>
+        <div class="form-group">
+          <%= f.label :詳細情報 %><%= f.text_area :information, value: text_information, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "登録する" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+ja:
+  enums:
+    user:
+      status:
+        common: "一般"
+        requester: "保護活動者"
+    request:
+      sex:
+        unknown: "不明"
+        male: "オス"
+        female: "メス"
+      vaccine:
+        unknown: "不明"
+        done: "接種済"
+        not_yet: "未接種"
+      surgery:
+        unknown: "不明"
+        done: "手術済"
+        not_yet: "未手術"

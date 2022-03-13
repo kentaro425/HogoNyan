@@ -7,7 +7,7 @@
   <div class="field">
     <%= f.label :お名前 %>
     <%= f.label :性 %>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, autofocus: true %>
     <%= f.label :名 %>
     <%= f.text_field :last_name %>
   </div>
@@ -42,7 +42,7 @@
 
   <div class="field">
     <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <div class="field">
@@ -60,7 +60,7 @@
 
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
 <% end %>
 
