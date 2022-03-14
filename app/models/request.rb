@@ -5,7 +5,7 @@ class Request < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: :user
   has_many :user_rooms, dependent: :destroy
   has_many :notifications, dependent: :destroy
-
+  has_many_attached :request_images
   enum breed: {
     ー猫種を選択してくださいー: 0, 雑種: 1, ミヌエット: 2, アメリカンショートヘア: 3
   }

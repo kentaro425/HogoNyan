@@ -1,2 +1,28 @@
-<h1>Public::Requests#index</h1>
-<p>Find me in app/views/public/requests/index.html.erb</p>
+<div class="container">
+    <div class="row">
+        <h3>里親募集一覧</h3><h4>(全<%= @request.count %>)件</h4>
+    </div>
+    <div class="row">
+        <div class="col-9 mx-auto">
+            <div class="row">
+                <% @request.each do |request| %>
+                <div class="card mx-3" style="width: 10rem;">
+                    <%= link_to request_path(request) do %>
+                        <% request.request_images.each do |image| %>
+                          <%= image_tag(image, width:100) %>
+                        <% end %>
+                        <%#= image_tag (request.request_images.first) %>
+                        <div class="card-body">
+                            <p class="card-text text-truncate text-dark"><%= request.title %></p>
+                            <p class="card-text"><%= request.breed %></p>
+                            <p class="card-text"><%= request.age %></p>
+                            <p class="card-text"><%= request.sex_i18n %></p>
+                            <p class="card-text"><%= request.prefecture.name %></p>
+                        </div>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
