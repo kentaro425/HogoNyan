@@ -23,9 +23,23 @@ class Public::RequestsController < ApplicationController
   end
 
   def edit
+    @request = Request.find(params[:id])
   end
 
   def update
+    request = Request.find(params[:id])
+    if params[:request][:image_ids]
+      params[:request][:image_ids].each do |image_id|
+        image = request.request_images.find(image_id)
+        image.purge
+      end
+    end
+    if request.update(request_params)
+      flash[:success] = "編集しました"
+      redirect_to request_path
+    else
+      render :edit
+    end
   end
 
   def destroy

@@ -9,7 +9,7 @@
                 <div class="card mx-3" style="width: 10rem;">
                     <%= link_to request_path(request) do %>
                         <% request.request_images.each do |image| %>
-                          <%= image_tag(image, width:100) %>
+                          <%= image_tag(image, width:160) %>
                         <% end %>
                         <%#= image_tag (request.request_images.first) %>
                         <div class="card-body">
