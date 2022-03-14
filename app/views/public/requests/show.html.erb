@@ -1,2 +1,51 @@
-<h1>Public::Requests#show</h1>
-<p>Find me in app/views/public/requests/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9 mx-auto">
+      <div class="row">
+        <h5><%= @request.title %></h5>
+      </div>
+      <div class="row">
+        <% @request.request_images.each do |image| %>
+          <%= image_tag(image, width:100) %>
+        <% end %>
+      </div>
+      <table class="table">
+        <tr>
+          <th>状況</th>
+          <td><%= @request.status %></td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <th>種類</th>
+          <td><%= @request.breed %></td>
+          <th>サイズ</th>
+          <td><%= @request.size %></td>
+        </tr>
+        <tr>
+          <th>性別</th>
+          <td><%= @request.sex_i18n %></td>
+          <th>年齢</th>
+          <td><%= @request.age %></td>
+        </tr>
+        <tr>
+          <th>ワクチン接種</th>
+          <td><%= @request.vaccine_i18n %></td>
+          <th>去勢／避妊</th>
+          <td><%= @request.surgery_i18n %></td>
+        </tr>
+        <tr>
+          <th>猫の所在地</th>
+          <td><%#= @request.prefecture.region.name %><%= @request.prefecture.name %></td>
+          <th>毛の柄</th>
+          <td><%= @request.pattern %></td>
+        </tr>
+      </table>
+      <table class="table">
+        <tr>
+          <th>詳細情報</th>
+          <td><%= @request.information %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

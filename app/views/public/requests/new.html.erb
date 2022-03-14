@@ -26,7 +26,7 @@
           <%= f.label :sex, Request.sexes_i18n[:female]%>
         </div>
         <div class="form-group">
-          <%= f.label :年齢 %><%= f.text_field :age, placeholder: "おおよその年齢" %>
+          <%= f.label :年齢 %><%= f.text_field :age, placeholder: "おおよその年齢（◯歳◯ヶ月）" %>
         </div>
         <div class="form-group">
           <%= f.label :ワクチン接種の有無 %><br>
@@ -49,6 +49,10 @@
         <div class="form-group">
           <%= f.label :猫の現在所在地 %><br>
           <%=  f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "--選択してください--"} %>
+        </div>
+        <div class="form-group">
+          <%= f.label :request_images, '画像' %><br>
+          <%= f.file_field :request_images, multiple: true %>
         </div>
         <div class="form-group">
           <%= f.label :詳細情報 %><%= f.text_area :information, value: text_information, class:"form-control" %>

@@ -5,13 +5,17 @@ class Request < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: :user
   has_many :user_rooms, dependent: :destroy
   has_many :notifications, dependent: :destroy
-
+  has_many_attached :request_images
   enum breed: {
     ー猫種を選択してくださいー: 0, 雑種: 1, ミヌエット: 2, アメリカンショートヘア: 3
   }
 
   enum size: {
     不明: 0, 大型: 1, 中型: 2, 小型: 3
+  }
+
+  enum status: {
+    募集中: 0, 検討中: 1, 募集終了: 2, 里親決定済: 3
   }
 
   enum sex: {
