@@ -14,6 +14,10 @@ class Request < ApplicationRecord
     不明: 0, 大型: 1, 中型: 2, 小型: 3
   }
 
+  enum status: {
+    募集中: 0, 検討中: 1, 募集終了: 2, 里親決定済: 3
+  }
+
   enum sex: {
     unknown: 0, male: 1, female: 2
   }, _suffix: true

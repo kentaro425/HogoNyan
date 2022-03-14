@@ -19,6 +19,7 @@ class Public::RequestsController < ApplicationController
   end
 
   def show
+    @request = Request.find(params[:id])
   end
 
   def edit
