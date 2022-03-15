@@ -32,5 +32,5 @@ class Request < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
-
+  belongs_to_active_hash :region, through: :prefecture
 end
