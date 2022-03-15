@@ -5,9 +5,11 @@ class Public::UsersController < ApplicationController
   end
 
   def requester_show
+    @user = User.find(params[:id])
   end
 
   def sns_show
+    @user = User.find(params[:id])
   end
 
   def edit

@@ -1,2 +1,26 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<%= render 'header' %>
+<div class="container">
+  <div class="row">
+    <div class="col-4 offset-2">
+      <% if @post.post_images.count > 0 %>
+        <%= image_tag @post.post_images.first, class: "post-image" %>
+      <% end %>
+    </div>
+    <div class="col-4 post-content">
+      <div class="row post-user-name">
+        <div class="col-8">
+          <%= link_to sns_home_user_path(@post.user.id) do %>
+            <%= @post.user.nickname %>
+          <% end %>
+        </div>
+        <div class="col-4">
+          <%= link_to "編集", edit_post_path(@post.id) %>
+          <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか?" %>
+        </div>
+      </div>
+      <div class="row">
+        <%= @post.body %>
+      </div>
+    </div>
+  </div>
+</div>

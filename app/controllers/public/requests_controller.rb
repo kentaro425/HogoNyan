@@ -43,6 +43,10 @@ class Public::RequestsController < ApplicationController
   end
 
   def destroy
+    @request = Request.find(params[:id])
+    @request.destroy
+    flash[:success] = "作成しました"
+    redirect_to requests_path
   end
 
   def search
