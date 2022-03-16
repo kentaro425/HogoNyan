@@ -46,9 +46,10 @@ Rails.application.routes.draw do
       resources :favorites, only: [:create, :destroy]
     end
 
-    resources :chats, only: [:show, :create]
+    resources :chats, only: [:create]
 
-    get 'rooms/index'
+    resources :rooms, only: [:create, :index, :show]
+
     root 'posts#index'
     get 'homes/about', as: 'about'
 

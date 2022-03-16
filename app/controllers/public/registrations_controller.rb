@@ -60,7 +60,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   def after_sign_in_path_for(resource)
-    home_user_path
+    home_user_path(current_user)
   end
 
   before_action :configure_permitted_parameters, if: :devise_controller?
