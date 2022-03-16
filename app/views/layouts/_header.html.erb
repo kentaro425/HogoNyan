@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light ">
     <div class="container">
       <div class="col-2">
-        <%= link_to "", class: "navbar-brand" do %>
+        <%= link_to requests_path, class: "navbar-brand" do %>
           <h2>HogoNyan</h2>
         <% end %>
       </div>
@@ -24,7 +24,7 @@
                 <%= link_to "保護猫の登録", new_request_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
               </li>
               <li>
-                <%= link_to "メッセージ", rooms_index_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+                <%= link_to "メッセージ", rooms_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
               </li>
               <li>
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary nav-link mx-2 text-dark" %>
@@ -37,7 +37,7 @@
                 <%= link_to "マイページ", home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
               </li>
               <li>
-                <%= link_to "メッセージ", rooms_index_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+                <%= link_to "メッセージ", rooms_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
               </li>
               <li>
                 <%= link_to "お気に入り", favorites_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>

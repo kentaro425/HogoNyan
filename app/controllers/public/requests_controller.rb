@@ -20,6 +20,23 @@ class Public::RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
+    @user = @request.user
+    @current_user_room = UserRoom.where(user_id: current_user.id)
+    @another_user_room = UserRoom.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @current_user_room.each do |current|
+        @another_user_room.each do |another|
+          if current.room_id == another.room_id
+            @is_room = true
+            @room_id = current.room_id
+          end
+        end
+      end
+      unless @is_room
+        @room = Room.new
+        @user_room = User.new
+      end
+    end
   end
 
   def edit
