@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     resources :chats, only: [:show, :create]
 
     get 'rooms/index'
-    root 'homes#top'
+    root 'posts#index'
     get 'homes/about', as: 'about'
 
     resources :posts do
