@@ -26,7 +26,7 @@ class Public::RequestsController < ApplicationController
     unless @user.id == current_user.id
       @current_user_room.each do |current|
         @another_user_room.each do |another|
-          if current.room_id == another.room_id
+          if (current.room_id == another.room_id) && (current.request_id == another.request_id) && (another.request_id == @request.id)
             @is_room = true
             @room_id = current.room_id
           end
