@@ -30,6 +30,10 @@ class Request < ApplicationRecord
     unknown: 0, done: 1, not_yet: 2
   }, _suffix: true
 
+  def favorited_by?(user)
+   favorites.where(user_id: user).exists?
+  end
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :region, through: :prefecture

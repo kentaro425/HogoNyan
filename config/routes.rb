@@ -43,7 +43,7 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
-      resources :favorites, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
 
     resources :chats, only: [:create]
@@ -57,7 +57,7 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
-      resources :favorites, only: [:create, :destroy]
+      resource :sns_favorites, only: [:create, :destroy]
       resources :comments, only: [:create]
     end
   end

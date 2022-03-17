@@ -7,6 +7,9 @@
       <div class="row">
         <% @request.each do |request| %>
           <div class="card mx-3" style="width: 10rem;">
+            <div id="favorite_buttons_<%= request.id %>">
+          　　　<%= render "public/favorites/favorites", request: request %>
+          　</div>
             <%= link_to request_path(request) do %>
               <div class="card-image">
                 <% if request.request_images.count > 0 %>

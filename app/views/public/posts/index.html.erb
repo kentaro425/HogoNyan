@@ -17,6 +17,9 @@
               <p class="card-text"><%= post.body %></p>
               <p class="card-text">🐱<%= post.tags.map(&:name).join(' 🐱') %></p>
               <%= link_to "詳細", post_path(post) %>
+              <div id="favorite_buttons_<%= post.id %>">
+          　　  　<%= render "public/sns_favorites/favorites", post: post %>
+        　     </div>
             </div>
           </div>
         </div>
