@@ -1,8 +1,8 @@
 class Public::RoomsController < ApplicationController
   def create
     room = Room.create
-    @current_user_room = UserRoom.create(user_id: current_user.id, room_id: room.id, request_id: params[:user_room][:request_id])
-    @another_user_room = UserRoom.create(user_id: params[:user_room][:user_id], room_id: room.id, request_id: params[:user_room][:request_id])
+    @current_user_room = UserRoom.create(user_id: current_user.id, room_id: room.id, request_id: params[:room][:request_id])
+    @another_user_room = UserRoom.create(user_id: params[:room][:user_id], room_id: room.id, request_id: params[:room][:request_id])
     redirect_to room_path(room)
   end
 

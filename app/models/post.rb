@@ -8,6 +8,11 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   has_many_attached :post_images
 
+  def favorited_by?(user)
+    sns_favorites.where(user_id: user).exists?
+  end
+
+
   def save_tag(sent_tags)
     # タグが存在していれば、全てのタグの名前を配列として取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
