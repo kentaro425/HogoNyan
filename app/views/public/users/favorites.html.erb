@@ -1,2 +1,6 @@
-<h1>Public::Users#favorites</h1>
-<p>Find me in app/views/public/users/favorites.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h3>いいね一覧</h3><h4>(全<%= @favorite_requests.count %>)件</h4>
+  </div>
+  <%= render 'public/requests/index', requests: @favorite_requests %>
+</div>

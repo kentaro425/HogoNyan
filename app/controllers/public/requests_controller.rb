@@ -4,7 +4,7 @@ class Public::RequestsController < ApplicationController
   end
 
   def index
-    @request = Request.all
+    @requests = Request.all
   end
 
   def create
