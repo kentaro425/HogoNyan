@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-9 mx-auto">
+    <div class="row">
+      <% requests.each do |request| %>
+        <div class="card mx-3" style="width: 10rem;">
+          <div id="favorite_buttons_<%= request.id %>">
+        　　　<%= render "public/favorites/favorites", request: request %>
+        　</div>
+          <%= link_to request_path(request) do %>
+            <div class="card-image">
+              <% if request.request_images.count > 0 %>
+                <%= image_tag request.request_images.first, class: "request-image" %>
+              <% end %>
+            </div>
+            <div class="card-body">
+              <p class="card-text text-truncate text-dark"><%= request.title %></p>
+              <p class="card-text"><%= request.breed %></p>
+              <p class="card-text"><%= request.age %></p>
+              <p class="card-text"><%= request.sex_i18n %></p>
+              <p class="card-text"><%= request.prefecture.name %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

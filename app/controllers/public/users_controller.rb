@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :requester_show, :sns_show, :edit, :requester_edit, :update, :requester_update]
+  before_action :set_user, only: [:show, :requester_show, :sns_show, :edit, :requester_edit, :update, :requester_update, :favorites, :sns_favorites]
 
   def show
   end
@@ -49,9 +49,13 @@ class Public::UsersController < ApplicationController
   end
 
   def favorites
+    favorites= Favorite.where(user_id: @user.id).pluck(:request_id)
+    @favorite_requests = Request.find(favorites)
   end
 
   def sns_favorites
+    favorites= SnsFavorite.where(user_id: @user.id).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
   end
 
   private
