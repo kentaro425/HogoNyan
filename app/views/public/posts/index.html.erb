@@ -1,4 +1,4 @@
-<%= render 'header' %>
+<%= render 'public/posts/header' %>
 <div class="container">
   <div class="row">
     <div class="col-6 mx-auto">
@@ -8,39 +8,23 @@
             <%= link_to sns_home_user_path(post.user.id) do %>
               <%= post.user.nickname %>
             <% end %>
-            <div class="sns-card-image">
+            <div>
               <% if post.post_images.count > 0 %>
-                <%= image_tag post.post_images.first, class: "post-image" %>
+                <%= image_tag post.post_images.first, class: "img-thumbnail" %>
               <% end %>
             </div>
             <div class="card-body">
-              <p class="card-text"><%= post.body %></p>
-              <p class="card-text">🐱<%= post.tags.map(&:name).join(' 🐱') %></p>
-              <%= link_to "詳細", post_path(post) %>
               <div id="favorite_buttons_<%= post.id %>">
           　　  　<%= render "public/sns_favorites/favorites", post: post %>
         　     </div>
-              <div class="comments">
-                <% if post.comments.present? %>
-                  <p>コメント件数：<%= post.comments.count %></p>
-                  <% post.comments.each do |comment| %>
-                    <%= comment.user.nickname %>
-                    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-                  <% end %>
-                <% else %>
-                  <p>コメントはまだありません</p>
-                <% end %>
-              </div>
-          　   <div class="form-group">
-                <%= form_with(model: @comment, url: post_comments_path(post), local: true) do |f| %>
-                  <!--エラーメッセージ-->
-                  <%= render 'layouts/error_messages', model: f.object %>
-                  <%#= f.hidden_field :post_id, value: post.id %>
-                  <%= f.text_area :content, rows:'1',placeholder: "コメントをここに",class: "form-control" %>
-                  <%= f.submit "送信する" %>
-                <% end %>
-              </div>
-
+              <p class="card-text"><%= post.body %></p>
+              <p class="card-text">🐱<%= post.tags.map(&:name).join(' 🐱') %></p>
+              <%= link_to post_path(post) do %>
+                <p class="card-text text-secondary">
+                コメント<%= post.comments.count %>件をすべて見る
+                </p>
+              <% end %>
+              <%= render 'public/comments/form', comment: @comment, post: post %>
             </div>
           </div>
         </div>
