@@ -1,2 +1,26 @@
-<h1>Public::Rooms#index</h1>
-<p>Find me in app/views/public/rooms/index.html.erb</p>
+<div class="container">
+  <% @another_user_rooms.each do |room| %>
+  <div class="row">
+    <div class="col-2">
+      <% if room.request.request_images.count > 0 %>
+        <%= image_tag room.request.request_images.first, class: "img-thumbnail" %>
+      <% end %>
+    </div>
+    <div class="col-2">
+        <%= link_to room_path(room.room) do %>
+          <%= room.request.title %>
+        <% end %>
+    </div>
+    <div class="col-2">
+      <%= room.user.nickname %>
+    </div>
+    <div class="col-4">
+      <% if room.room.chats.present? %>
+        <%= Chat.find_by(id: room.room.chat_ids.last).content %>
+      <% else %>
+        <p>メッセージはまだありません</p>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>
