@@ -4,11 +4,12 @@ class Public::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @post = Post.find(params[:post_id])
     @comment.post_id = @post.id
-    # @comment.user_id = current_user.id
+    @comment.user_id = current_user.id
     if @comment.save
       redirect_to post_path(@post), notice: 'コメントを投稿しました'
     else
-      render 'posts/show'
+      @posts = Post.all
+      render 'public/posts/index'
     end
   end
 
