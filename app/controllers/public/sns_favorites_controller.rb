@@ -4,6 +4,7 @@ class Public::SnsFavoritesController < ApplicationController
   def create
     @favorite = SnsFavorite.new(user_id: current_user.id,  post_id: @post.id)
     @favorite.save
+    @post.create_notification_favorite!(current_user)
   end
 
   def destroy

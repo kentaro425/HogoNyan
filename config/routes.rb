@@ -33,8 +33,11 @@ Rails.application.routes.draw do
       end
 
       resources :notifications, only: [:index, :destroy] do
+        member do
+          patch "destroy"
+        end
         collection do
-          delete "destroy_all"
+          patch "destroy_all"
         end
       end
     end
