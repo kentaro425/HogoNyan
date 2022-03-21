@@ -1,0 +1,9 @@
+<div class="form-group mt-auto">
+  <%= form_with(model: comment, url: post_comments_path(post), local: true) do |f| %>
+    <!--エラーメッセージ-->
+    <%= render 'layouts/error_messages', model: f.object %>
+    <%#= f.hidden_field :post_id, value: post.id %>
+    <%= f.text_area :content, rows:'1',placeholder: "コメントをここに",class: "form-control" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

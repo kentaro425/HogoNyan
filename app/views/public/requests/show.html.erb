@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9 mx-auto">
+      <div class="row">
+        <h5><%= @request.title %></h5>
+      </div>
+      <div class="row">
+        <% @request.request_images.each do |image| %>
+          <%= image_tag(image, width:100) %>
+        <% end %>
+      </div>
+      <table class="table">
+        <tr>
+          <th>状況</th>
+          <td><%= @request.status %></td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <th>種類</th>
+          <td><%= @request.breed %></td>
+          <th>サイズ</th>
+          <td><%= @request.size %></td>
+        </tr>
+        <tr>
+          <th>性別</th>
+          <td><%= @request.sex_i18n %></td>
+          <th>年齢</th>
+          <td><%= @request.age %></td>
+        </tr>
+        <tr>
+          <th>ワクチン接種</th>
+          <td><%= @request.vaccine_i18n %></td>
+          <th>去勢／避妊</th>
+          <td><%= @request.surgery_i18n %></td>
+        </tr>
+        <tr>
+          <th>猫の所在地</th>
+          <td><%= @request.prefecture.region.name %>>><%= @request.prefecture.name %></td>
+          <th>毛の柄</th>
+          <td><%= @request.pattern %></td>
+        </tr>
+      </table>
+      <table class="table">
+        <tr>
+          <th>詳細情報</th>
+          <td><%= @request.information %></td>
+        </tr>
+      </table>
+      <div>
+        <% unless @user.id == current_user.id %>
+          <% if @is_room == true %>
+            <%= link_to "お問い合わせ確認へ", room_path(@room_id) %>
+          <% else %>
+            <%= form_with model: @room, local: true do |f| %>
+              <%#= fields_for @user_room do |e| %>
+                <%= f.hidden_field :user_id, value: @user.id %>
+                <%= f.hidden_field :request_id, value: @request.id %>
+              <%# end %>
+              <%= f.submit "お問い合わせへ", class:"btn btn-primary btn-lg" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

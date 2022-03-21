@@ -1,0 +1,32 @@
+<%= render 'header' %>
+<div class="container">
+  <div class="row">
+    <div class="col-4 mx-auto">
+      <h3>投稿の編集</h3>
+      <%= form_with model: @post, local: true  do |f| %>
+        <div class="form-group">
+          <%= f.label :post_images, '画像' %><br>
+          <%= f.file_field :post_images, multiple: true %>
+        </div>
+        <% if @post.post_images.present? %>
+          <p>現在登録されている画像（削除するものはチェックしてください）</p>
+          <% @post.post_images.each do |image| %>
+            <%= f.check_box :image_ids, {multiple: true}, image.id, false %>
+            <%= image_tag image, size:"100x100" %> <br>
+          <% end %>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :body, '本文' %><br>
+          <%= f.text_area :body %>
+        </div>
+        <div class="form-group">
+          <%= f.label :name,'タグ (,で区切ると複数タグ登録できます)' %>
+          <%= f.text_field :name, value: @tag_list %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "登録する" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

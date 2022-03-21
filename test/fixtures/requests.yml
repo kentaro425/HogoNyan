@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  prefecture_id: 1
+  status: 1
+  title: MyString
+  breed: 1
+  size: 1
+  sex: 1
+  age: MyString
+  vaccine: 1
+  surgery: 1
+  pattern: MyString
+  information: MyText
+
+two:
+  user_id: 1
+  prefecture_id: 1
+  status: 1
+  title: MyString
+  breed: 1
+  size: 1
+  sex: 1
+  age: MyString
+  vaccine: 1
+  surgery: 1
+  pattern: MyString
+  information: MyText

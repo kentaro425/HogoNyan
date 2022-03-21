@@ -1,0 +1,28 @@
+<%= render 'header' %>
+<div class="container">
+  <div class="row">
+    <div class="col-4 offset-2">
+      <% if @post.post_images.count > 0 %>
+        <%= image_tag @post.post_images.first, class: "img-thumbnail" %>
+      <% end %>
+    </div>
+    <div class="col-4 border border-dark">
+      <div class="row border border-dark border-top-0 border-right-0 border-left-0">
+        <div class="col-8">
+          <%= link_to sns_home_user_path(@post.user.id) do %>
+            <%= @post.user.nickname %>
+          <% end %>
+        </div>
+        <div class="col-4">
+          <%= link_to "編集", edit_post_path(@post.id) %>
+          <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか?" %>
+        </div>
+      </div>
+      <div class="row">
+        <%= @post.body %>
+      </div>
+      <%= render 'public/comments/post_comments', post: @post %>
+      <%= render 'public/comments/form', comment: @comment, post: @post %>
+    </div>
+  </div>
+</div>

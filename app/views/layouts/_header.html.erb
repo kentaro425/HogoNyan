@@ -1,0 +1,86 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container">
+      <div class="col-2">
+        <%= link_to requests_path, class: "navbar-brand" do %>
+          <h2>HogoNyan</h2>
+        <% end %>
+      </div>
+      <div class="col-10">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? && current_user.status == 'requester' %>
+              <li class="mx-5 mt-5">ようこそ、<%= current_user.nickname %>さん！</li>
+              <li>
+                <%= link_to "SNSへ", posts_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "募集者用マイページ", requester_home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "保護猫の登録", new_request_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "メッセージ", rooms_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary nav-link mx-2 text-dark" %>
+              </li>
+            <% elsif user_signed_in? %>
+              <li>
+                <%= link_to "SNSへ", sns_home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "マイページ", home_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "メッセージ", rooms_path,class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "お気に入り", favorites_user_path(current_user),class: "btn btn-outline-secondary nav-link mx-2 text-dark"  %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary nav-link mx-2 text-dark" %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li>
+                <%= link_to "SNSへ", posts_path,class: "text-dark btn btn-outline-secondary mx-2 nav-link" %>
+              </li>
+              <li>
+                <%= link_to "会員一覧", admin_users_path,class: "text-dark btn btn-outline-secondary mx-2 nav-link" %>
+              </li>
+              <li>
+                <%= link_to "通知", admin_notifications_path,class: "text-dark btn btn-outline-secondary mx-2 nav-link" %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: "text-dark btn btn-outline-secondary mx-2 nav-link" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to " SNSへ", posts_path,class: "text-dark btn btn-outline-secondary nav-link mx-2" %>
+              </li>
+              <li>
+                <%= link_to "ログイン", new_user_session_path,class: "text-dark btn btn-outline-secondary nav-link mx-2" %>
+              </li>
+              <li>
+                <%= link_to "新規登録", new_user_registration_path,class: "text-dark btn btn-outline-secondary nav-link mx-2" %>
+              </li>
+              <li>
+                <%= link_to "お気に入り", about_path,class: "text-dark btn btn-outline-secondary nav-link mx-2" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <!--<div class="text-right my-2">-->
+        <!--  <%#= search_form_for @q, url: search_users_path do |f|%>-->
+        <!--    <%#= f.search_field :name_cont %>-->
+        <!--    <%#= f.submit "検索"%>-->
+        <!--  <%# end %>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <h3>募集者情報編集</h3>
+      <%= form_with model: @user, url: requester_update_user_path, method: :patch, local: true  do |f| %>
+        <div class="row">
+          <%= f.label :会員種別 %>
+        </div>
+        <div class="row">
+          <%= f.radio_button :status, User.statuses.key(0) %>
+          <%= f.label :status, User.statuses_i18n[:common] %><br>
+          <%= f.radio_button :status, User.statuses.key(1) %>
+          <%= f.label :status, User.statuses_i18n[:requester]%>
+        </div>
+        <div class="row">
+          <%= f.label :募集者プロフィール %>
+        </div>
+        <div class="row">
+          <%= f.text_area :introduction %>
+        </div>
+        <div class="row">
+          <%= f.label :募集者紹介写真 %>
+        </div>
+        <div class="row">
+          <%= f.file_field :requester_image, accept: "image/*" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "更新する" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
