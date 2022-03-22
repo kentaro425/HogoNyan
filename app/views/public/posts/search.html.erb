@@ -1,2 +1,37 @@
-<h1>Public::Posts#search</h1>
-<p>Find me in app/views/public/posts/search.html.erb</p>
+<%= render 'public/posts/header' %>
+<div class="container">
+  <div class="row">
+    <%= search_form_for @p, url: search_posts_path do |f| %>
+      <%= f.text_field :body_cont, placeholder: "キーワードから探す", class: "input-box" %>
+    <% end %>
+    <div class="col-6 mx-auto">
+      <% @results.each do |result| %>
+        <div class="row">
+          <div class="card mx-auto" style="width: 30rem;">
+            <%= link_to sns_home_user_path(result.user.id) do %>
+              <%= result.user.nickname %>
+            <% end %>
+            <div>
+              <% if result.post_images.count > 0 %>
+                <%= image_tag result.post_images.first, class: "img-thumbnail" %>
+              <% end %>
+            </div>
+            <div class="card-body">
+              <div id="favorite_buttons_<%= result.id %>">
+          　　  　<%= render "public/sns_favorites/favorites", post: result %>
+        　     </div>
+              <p class="card-text"><%= result.body %></p>
+              <p class="card-text">🐱<%= result.tags.map(&:name).join(' 🐱') %></p>
+              <%= link_to post_path(result) do %>
+                <p class="card-text text-secondary">
+                コメント<%= result.comments.count %>件をすべて見る
+                </p>
+              <% end %>
+              <%= render 'public/comments/form', comment: @comment, post: result %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
