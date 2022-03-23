@@ -1,4 +1,6 @@
 class Public::RequestsController < ApplicationController
+  before_action :search_product, only: [:index, :search]
+  
   def new
     @request = Request.new
   end
@@ -70,6 +72,11 @@ class Public::RequestsController < ApplicationController
   end
 
   private
+  
+  def search_product
+    @p = Request.ransack(params[:q])  # 検索オブジェクトを生成
+    @results = @p.result
+  end
 
   def request_params
     params.require(:request).permit(:user_id, :prefecture_id, :title, :breed, :size, :sex, :age, :vaccine, :surgery, :pattern, :information, request_images: [])

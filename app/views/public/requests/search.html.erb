@@ -1,2 +1,9 @@
-<h1>Public::Requests#search</h1>
-<p>Find me in app/views/public/requests/search.html.erb</p>
+<div class="container">
+  <%= render 'form', p: @p %>
+  <div class="row">
+    <div class="col-9 mx-auto d-flex">
+      <h3>里親募集一覧</h3><h4>(全<%= @results.count %>)件</h4>
+    </div>
+  </div>
+  <%= render 'index', requests: @results %>
+</div>

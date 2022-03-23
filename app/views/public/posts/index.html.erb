@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <%= search_form_for @p, url: search_posts_path do |f| %>
-      <%= f.text_field :body_cont, placeholder: "キーワードから探す", class: "input-box" %>
+      <%= f.text_field :body_or_tags_name_cont, placeholder: "キーワードから探す", class: "input-box" %>
     <% end %>
     <div class="col-6 mx-auto">
       <% @posts.each do |post| %>
