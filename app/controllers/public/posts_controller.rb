@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :search_product, only: [:index, :show, :search]
+
   def new
     @post = Post.new
   end
@@ -10,7 +12,7 @@ class Public::PostsController < ApplicationController
     if @post.save
       @post.save_tag(tag_list)
       flash[:notice] = "投稿を作成しました"
-      redirect_to post_path
+      redirect_to post_path(@post)
     else
       render :new
     end
@@ -56,8 +58,9 @@ class Public::PostsController < ApplicationController
   end
 
   def search
+    @comment = Comment.new
   end
-  
+
   def search_tag
     #検索結果画面でもタグ一覧表示
     @tag_list=Tag.all
@@ -68,6 +71,11 @@ class Public::PostsController < ApplicationController
   end
 
   private
+
+  def search_product
+    @p = Post.ransack(params[:q])  # 検索オブジェクトを生成
+    @results = @p.result
+  end
 
   def post_params
     params.require(:post).permit(:user_id, :body, post_images: [])

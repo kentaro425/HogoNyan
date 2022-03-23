@@ -2,7 +2,7 @@
   <div class="col-9 mx-auto">
     <div class="row">
       <% requests.each do |request| %>
-        <div class="card mx-3" style="width: 10rem;">
+        <div class="card mx-3 mb-3" style="width: 10rem;">
           <div id="favorite_buttons_<%= request.id %>">
         　　　<%= render "public/favorites/favorites", request: request %>
         　</div>
