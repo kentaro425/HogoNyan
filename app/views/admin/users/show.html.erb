@@ -1,2 +1,112 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h3 class="p-3"><%= @user.last_name + @user.first_name%>さんの会員情報</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-10 offset-1">
+      <table class="table table-hover table-bordered">
+        <tr>
+          <th class="table-active">会員ID</th>
+          <td><%= @user.id %></td>
+        </tr>
+        <tr>
+          <th class="table-active">氏名</th>
+          <td><%= @user.last_name + " " + @user.first_name %></td>
+        </tr>
+        <tr>
+          <th class="table-active">フリガナ</th>
+          <td><%= @user.last_name_kana + " " + @user.first_name_kana %></td>
+        </tr>
+        <tr>
+          <th class="table-active">ニックネーム</th>
+          <td><%= @user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="table-active">郵便番号</th>
+          <td><%= @user.postal_code %></td>
+        </tr>
+        <tr>
+          <th class="table-active">住所</th>
+          <td><%= @user.address %></td>
+        </tr>
+        <tr>
+          <th class="table-active">電話番号</th>
+          <td><%= @user.phone %></td>
+        </tr>
+        <tr>
+          <th class="table-active">メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <th class="table-active">会員ステータス</th>
+          <td><%= @user.status_i18n %></td>
+        </tr>
+        <tr>
+          <th class="table-active">投稿ステータス</th>
+          <% if @user.is_active == false %>
+            <td class="text-secondary">無効</td>
+          <% else %>
+            <td class="text-success">有効</td>
+          <% end %>
+        </tr>
+        <tr>
+          <th class="table-active">退会ステータス</th>
+          <% if @user.is_deleted == false %>
+            <td class="text-success">有効</td>
+          <% else %>
+            <td class="text-secondary">退会</td>
+          <% end %>
+        </tr>
+      </table>
+
+      <% if @user.status == "requester" %>
+      <table class="table table-hover table-bordered mt-3">
+        <tr>
+          <th class="table-active">保護活動者画像</th>
+          <% if @user.requester_image.attached? %>
+          <td><%= image_tag @user.requester_image, class: "w-25" %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th class="table-active">保護活動者情報</th>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </table>
+      <% else %>
+      <% end %>
+
+      <% if @user.is_active == true %>
+      <table class="table table-hover table-bordered mt-3">
+        <tr>
+          <th class="table-active">投稿数</th>
+          <td><%= @user.posts.count %>件</td>
+          <th class="table-active">フォロー</th>
+          <td><%= @user.followings.count %>人</td>
+          <th class="table-active">フォロワー</th>
+          <td><%= @user.followers.count %>人</td>
+        </tr>
+        <tr>
+          <th class="table-active">投稿者画像</th>
+          <% if @user.sns_image.attached? %>
+          <td><%= image_tag @user.sns_image, class: "w-25" %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th class="table-active">投稿者情報</th>
+          <td colspan=5><%= @user.profile %></td>
+        </tr>
+      </table>
+      <% else %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-7 offset-2">
+      <%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-success mr-5"%>
+      <%= link_to "募集一覧を見る", sns_home_user_path(@user.id), class: "btn btn-primary"%>
+      <%= link_to "投稿一覧を見る", requester_home_user_path(@user.id), class: "btn btn-primary"%>
+    </div>
+  </div>
+</div>
