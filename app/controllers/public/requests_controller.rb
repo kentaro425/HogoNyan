@@ -1,6 +1,6 @@
 class Public::RequestsController < ApplicationController
   before_action :search_product, only: [:index, :search]
-  
+
   def new
     @request = Request.new
   end
@@ -23,20 +23,22 @@ class Public::RequestsController < ApplicationController
   def show
     @request = Request.find(params[:id])
     @user = @request.user
-    @current_user_room = UserRoom.where(user_id: current_user.id)
-    @another_user_room = UserRoom.where(user_id: @user.id)
-    unless @user.id == current_user.id
-      @current_user_room.each do |current|
-        @another_user_room.each do |another|
-          if (current.room_id == another.room_id) && (current.request_id == another.request_id) && (another.request_id == @request.id)
-            @is_room = true
-            @room_id = current.room_id
+    if user_signed_in?
+      @current_user_room = UserRoom.where(user_id: current_user.id)
+      @another_user_room = UserRoom.where(user_id: @user.id)
+      unless @user.id == current_user.id
+        @current_user_room.each do |current|
+          @another_user_room.each do |another|
+            if (current.room_id == another.room_id) && (current.request_id == another.request_id) && (another.request_id == @request.id)
+              @is_room = true
+              @room_id = current.room_id
+            end
           end
         end
-      end
-      unless @is_room
-        @room = Room.new
-        @user_room = User.new
+        unless @is_room
+          @room = Room.new
+          @user_room = User.new
+        end
       end
     end
   end
@@ -72,7 +74,7 @@ class Public::RequestsController < ApplicationController
   end
 
   private
-  
+
   def search_product
     @p = Request.ransack(params[:q])  # 検索オブジェクトを生成
     @results = @p.result

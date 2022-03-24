@@ -46,6 +46,7 @@
           <td><%= @request.information %></td>
         </tr>
       </table>
+      <% if user_signed_in? %>
       <div>
         <% unless @user.id == current_user.id %>
           <% if @is_room == true %>
@@ -61,6 +62,9 @@
           <% end %>
         <% end %>
       </div>
+      <% else %>
+      お問い合わせはログインまたは新規会員登録してください
+      <% end %>
     </div>
   </div>
 </div>
