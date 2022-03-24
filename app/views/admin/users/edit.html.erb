@@ -1,1 +1,111 @@
-admin users edit
+<div class="container">
+  <div class="row">
+    <h3 class="p-3"><%= @user.last_name + @user.first_name%>さんの会員情報編集</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-10 offset-1">
+      <%= form_with model: @user, url: admin_user_path, local: true  do |f| %>
+      <table class="table table-hover table-bordered">
+        <tr>
+          <th class="table-active">氏名</th>
+          <td class="d-flex"><%= f.label :性, class: "col-form-label mr-1" %><%= f.text_field :last_name, autofocus: true, class: "form-control" %></td>
+          <td class="d-flex"><%= f.label :名, class: "col-form-label mr-1" %><%= f.text_field :first_name, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">フリガナ</th>
+          <td class="d-flex"><%= f.label :セイ, class: "col-form-label mr-1" %><%= f.text_field :last_name_kana, class: "form-control" %></td>
+          <td class="d-flex"><%= f.label :メイ, class: "col-form-label mr-1" %><%= f.text_field :first_name_kana, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">ニックネーム</th>
+          <td><%= f.text_field :nickname, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">郵便番号</th>
+          <td><%= f.text_field :postal_code, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">住所</th>
+          <td><%= f.text_field :address, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">電話番号</th>
+          <td><%= f.text_field :phone, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">メールアドレス</th>
+          <td><%= f.email_field :email, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">会員ステータス</th>
+          <td>
+            <%= f.radio_button :status, User.statuses.key(0) %>
+            <%= f.label :status, User.statuses_i18n[:common] %>
+            <%= f.radio_button :status, User.statuses.key(1) %>
+            <%= f.label :status, User.statuses_i18n[:requester]%>
+          </td>
+        </tr>
+        <tr>
+          <th class="table-active">投稿ステータス</th>
+          <td>
+            <%= f.radio_button :is_active, true %>
+            <%= f.label :is_active, "有効", class: "text-success" %>
+            <%= f.radio_button :is_active, false %>
+            <%= f.label :is_active, "無効", class: "text-danger" %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table-active">退会ステータス</th>
+          <td>
+            <%= f.radio_button :is_deleted, false %>
+            <%= f.label :is_deleted, "有効", class: "text-success" %>
+            <%= f.radio_button :is_deleted, true %>
+            <%= f.label :is_deleted, "退会", class: "text-danger" %>
+          </td>
+        </tr>
+      </table>
+
+      <% if @user.status == "requester" %>
+      <table class="table table-hover table-bordered mt-3">
+        <tr>
+          <th class="table-active">保護活動者画像</th>
+          <td><%= image_tag @user.requester_image, class: "w-25" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">保護活動者情報</th>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </table>
+      <% else %>
+      <% end %>
+
+      <% if @user.is_active == true %>
+      <table class="table table-hover table-bordered mt-3">
+        <tr>
+          <th class="table-active">投稿数</th>
+          <td><%= @user.posts.count %>件</td>
+          <th class="table-active">フォロー</th>
+          <td><%= @user.followings.count %>人</td>
+          <th class="table-active">フォロワー</th>
+          <td><%= @user.followers.count %>人</td>
+        </tr>
+        <tr>
+          <th class="table-active">投稿者画像</th>
+          <% if @user.sns_image.exists? %>
+          <td><%= image_tag @user.sns_image, class: "w-25" %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th class="table-active">投稿者情報</th>
+          <td colspan=5><%= @user.profile %></td>
+        </tr>
+      </table>
+      <% else %>
+      <% end %>
+      <%= f.submit "更新する" %>
+    <% end %>
+    </div>
+  </div>
+
+</div>
