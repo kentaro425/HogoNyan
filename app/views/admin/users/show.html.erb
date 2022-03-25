@@ -66,6 +66,8 @@
           <th class="table-active">保護活動者画像</th>
           <% if @user.requester_image.attached? %>
           <td><%= image_tag @user.requester_image, class: "w-25" %></td>
+          <% else %>
+            <td><%= image_tag 'no_image', class: "w-25" %></td>
           <% end %>
         </tr>
         <tr>
@@ -90,6 +92,8 @@
           <th class="table-active">投稿者画像</th>
           <% if @user.sns_image.attached? %>
           <td><%= image_tag @user.sns_image, class: "w-25" %></td>
+          <% else %>
+            <td><%= image_tag 'no_image', class: "w-25" %></td>
           <% end %>
         </tr>
         <tr>
