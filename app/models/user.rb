@@ -24,6 +24,8 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
+  validates :nickname, presence: true
+
   enum status: { common: 0, requester: 1 }
 
     # フォローしたときの処理
@@ -51,6 +53,7 @@ class User < ApplicationRecord
     end
   end
 
+  # <---ユーザーステーテス変更通知--->
   def create_notification_user!(current_user)
     temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, nil, 'user_status'])
     if temp.blank?

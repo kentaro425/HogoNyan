@@ -34,34 +34,33 @@
           </a>
         </div>
       </div>
-      <table class="table">
+      <table class="table mt-4">
         <tr>
-          <th>状況</th>
-          <td><%= @request.status %></td>
-          <td colspan="2"></td>
+          <th class="table-active">状況</th>
+          <td colspan=3><%= @request.status %></td>
         </tr>
         <tr>
-          <th>種類</th>
+          <th class="table-active">種類</th>
           <td><%= @request.breed %></td>
-          <th>サイズ</th>
+          <th class="table-active">サイズ</th>
           <td><%= @request.size %></td>
         </tr>
         <tr>
-          <th>性別</th>
+          <th class="table-active">性別</th>
           <td><%= @request.sex_i18n %></td>
-          <th>年齢</th>
+          <th class="table-active">年齢</th>
           <td><%= @request.age %></td>
         </tr>
         <tr>
-          <th>ワクチン接種</th>
+          <th class="table-active">ワクチン接種</th>
           <td><%= @request.vaccine_i18n %></td>
-          <th>去勢／避妊</th>
+          <th class="table-active">去勢／避妊</th>
           <td><%= @request.surgery_i18n %></td>
         </tr>
         <tr>
-          <th>猫の所在地</th>
+          <th class="table-active">猫の所在地</th>
           <td><%= @request.prefecture.region.name %>>><%= @request.prefecture.name %></td>
-          <th>毛の柄</th>
+          <th class="table-active">毛の柄</th>
           <td><%= @request.pattern %></td>
         </tr>
       </table>
@@ -72,18 +71,12 @@
         </tr>
       </table>
       <% if user_signed_in? %>
-      <div>
+      <div class>
         <% unless @user.id == current_user.id %>
           <% if @is_room == true %>
-            <%= link_to "お問い合わせ確認へ", room_path(@room_id) %>
+            <%= link_to "お問い合わせ確認へ", room_path(@room_id), class: "btn btn-warning btn-block" %>
           <% else %>
-            <%= form_with model: @room, local: true do |f| %>
-              <%#= fields_for @user_room do |e| %>
-                <%= f.hidden_field :user_id, value: @user.id %>
-                <%= f.hidden_field :request_id, value: @request.id %>
-              <%# end %>
-              <%= f.submit "お問い合わせへ", class:"btn btn-primary btn-lg" %>
-            <% end %>
+            <%= link_to "お申し込み・お問い合わせへ", inquiry_request_path(@request), class: "btn btn-warning btn-block" %>
           <% end %>
         <% end %>
       </div>
