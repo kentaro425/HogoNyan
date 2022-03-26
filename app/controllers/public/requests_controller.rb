@@ -35,12 +35,16 @@ class Public::RequestsController < ApplicationController
             end
           end
         end
-        unless @is_room
-          @room = Room.new
-          @user_room = User.new
-        end
       end
     end
+  end
+
+  def inquiry
+    @request = Request.find(params[:id])
+    @user = @request.user
+    @room = Room.new
+    @user_room = UserRoom.new
+    @chat = Chat.new
   end
 
   def edit

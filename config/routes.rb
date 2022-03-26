@@ -46,6 +46,10 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
+      member do
+        get "inquiry"
+      end
+
       resource :favorites, only: [:create, :destroy]
     end
 
