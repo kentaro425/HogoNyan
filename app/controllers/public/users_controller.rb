@@ -32,6 +32,9 @@ class Public::UsersController < ApplicationController
   def requester_update
     if @user.update(requester_params)
       flash[:notice] = "ユーザ情報を変更しました。"
+      if @user.status == 'requester'
+        @user.create_notification_user!(current_user)
+      end
       redirect_to requester_home_user_path
     else
       render :edit

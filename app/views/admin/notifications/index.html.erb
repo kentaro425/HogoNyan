@@ -1,2 +1,49 @@
-<h1>Admin::Notifications#index</h1>
-<p>Find me in app/views/admin/notifications/index.html.erb</p>
+<% notifications = @notifications.where.not(checked: true) %>
+<% if notifications.exists? %>
+  <% notifications.each do |notification| %>
+    <% visiter = notification.visiter %>
+    <div class="col-md-4 ml-auto">
+      <%= link_to "すべて削除", destroy_all_admin_notifications_path, method: :patch, class: "btn btn-danger" %>
+    </div>
+    <div class="col-md-6 mx-auto">
+      <div class="form-inline">
+        <span>
+          <%= link_to admin_user_path(visiter) do %>
+            <%#= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
+            <strong>
+              <%= visiter.last_name + visiter.first_name %>
+            </strong>
+          <% end %>
+          さんが
+        </span>
+
+        <% case notification.action %>
+          <% when 'user_status' then %>
+            募集者ステータスを変更しました。
+          <% when 'complete' then %>
+            <% visited = notification.visited %>
+            <%= link_to admin_user_path(visited) do %>
+              <strong>
+                <%= visited.last_name + visited.first_name %>
+              </strong>
+            <% end %>
+            さんとの
+            <%= link_to "取引", notification.request %>
+            を完了しました。
+        <% end %>
+        <div class="small text-muted text-right">
+          <%= time_ago_in_words(notification.created_at).upcase %>
+        </div>
+        <div>
+          <%= link_to "削除", admin_notification_path(notification), method: :patch, class: "btn btn-outline-danger" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= paginate notifications %>
+<% else %>
+  <div class="col-md-6 mx-auto">
+    <p>通知はありません</p>
+  </div>
+<% end %>
+

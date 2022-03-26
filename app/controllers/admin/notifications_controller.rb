@@ -1,14 +1,16 @@
 class Admin::NotificationsController < ApplicationController
   def index
-    # @notifications = current_user.passive_notifications.page(params[:page]).per(20)
-    # @notifications.where(notification_allowed: true).each do |notification|
-    #   notification.update_attributes(checked: true)
-    # end
+    @notifications = Notification.page(params[:page]).per(20).where(action: 'user_status')
   end
 
   def destroy
+    @notification = Notification.find(params[:id])
+    @notification.update(checked: true)
+    redirect_to request.referer
   end
 
   def destroy_all
+    @notifications.update(checked: true)
+    redirect_to request.referer
   end
 end
