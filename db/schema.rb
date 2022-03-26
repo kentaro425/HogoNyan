@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_074333) do
+ActiveRecord::Schema.define(version: 2022_03_26_140310) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -153,18 +153,18 @@ ActiveRecord::Schema.define(version: 2022_03_13_074333) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "last_name", null: false
-    t.string "first_name", null: false
-    t.string "last_name_kana", null: false
-    t.string "first_name_kana", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "last_name_kana"
+    t.string "first_name_kana"
     t.string "nickname", null: false
     t.text "introduction"
     t.string "profile"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "postal_code", null: false
-    t.string "address", null: false
-    t.string "phone", null: false
+    t.string "postal_code"
+    t.string "address"
+    t.string "phone"
     t.integer "status", default: 0, null: false
     t.boolean "is_active", default: false, null: false
     t.boolean "is_deleted", default: false, null: false
