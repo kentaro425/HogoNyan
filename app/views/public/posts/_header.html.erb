@@ -2,28 +2,43 @@
 <style type="text/css">
 header {
   display: none;
-  display:none;
 }
 </style>
 </head>
-<nav class="navbar navbar-expand-lg navbar-light ">
+<nav class="navbar navbar-expand navbar-light bg-cream ">
   <div class="container">
-    <div class="col-2">
-      <%= link_to posts_path, class: "navbar-brand" do %>
-        <h2>HogoNyan</h2>
+    <%= link_to posts_path, class: "navbar-brand" do %>
+      <h4 class="text-brown font-italic">HogoNyan</h4>
+    <% end %>
+    <ul class="navbar-nav ml-auto">
+      <% if user_signed_in? && current_user.is_active == true %>
+        <li>
+          <%= link_to requests_path, class: "mx-2 nav-link" do %>
+            <i class="fas fa-h-square fa-2x text-brown"></i>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_post_path,class: "mx-2 nav-link" do %>
+            <i class="fas fa-plus-square fa-2x text-brown"></i>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to sns_home_user_path(current_user),class: "mx-2 nav-link" do %>
+            <i class="fas fa-home fa-2x text-brown"></i>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to  user_notifications_path(current_user),class: "mx-2 nav-link" do %>
+            <i class="fas fa-bell fa-2x text-brown"></i>
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to requests_path,class: "mx-2 nav-link" do %>
+            <i class="fas fa-h-square fa-2x text-brown"></i>
+          <% end %>
+        </li>
       <% end %>
-    </div>
-    <div class="col-10">
-      <ul class="navbar-nav ml-auto">
-        <% if user_signed_in? && current_user.is_active == true %>
-          <li><%= link_to "保護猫サイトへ", requests_path,class: "text-dark btn btn-outline-secondary mx-2 nav-link" %></li>
-          <li><%= link_to "新規", new_post_path,class: "text-dark btn btn-outline-secondary mx-2 nav-link" %></li>
-          <li><%= link_to "マイページ", sns_home_user_path(current_user),class: "text-dark btn btn-outline-secondary mx-2 nav-link" %></li>
-          <li><%= link_to "通知", user_notifications_path(current_user),class: "text-dark btn btn-outline-secondary mx-2 nav-link" %></li>
-        <% else %>
-          <li><%= link_to "保護猫サイトへ", requests_path,class: "text-dark btn btn-outline-secondary mx-2 nav-link" %></li>
-        <% end %>
-      </ul>
-    </div>
+    </ul>
   </div>
 </nav>

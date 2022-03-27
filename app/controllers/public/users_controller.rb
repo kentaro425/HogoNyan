@@ -2,6 +2,8 @@ class Public::UsersController < ApplicationController
   before_action :set_user, only: [:show, :requester_show, :sns_show, :edit, :requester_edit, :update, :requester_update, :favorites, :sns_favorites]
 
   def show
+    favorites= Favorite.where(user_id: @user.id).pluck(:request_id)
+    @favorite_requests = Request.find(favorites)
   end
 
   def requester_show
