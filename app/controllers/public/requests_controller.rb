@@ -1,10 +1,12 @@
 class Public::RequestsController < ApplicationController
+  before_action :search_product, only: [:index, :search]
+
   def new
     @request = Request.new
   end
 
   def index
-    @requests = Request.all
+    @requests = Request.page(params[:page]).per(10)
   end
 
   def create
@@ -21,22 +23,28 @@ class Public::RequestsController < ApplicationController
   def show
     @request = Request.find(params[:id])
     @user = @request.user
-    @current_user_room = UserRoom.where(user_id: current_user.id)
-    @another_user_room = UserRoom.where(user_id: @user.id)
-    unless @user.id == current_user.id
-      @current_user_room.each do |current|
-        @another_user_room.each do |another|
-          if (current.room_id == another.room_id) && (current.request_id == another.request_id) && (another.request_id == @request.id)
-            @is_room = true
-            @room_id = current.room_id
+    if user_signed_in?
+      @current_user_room = UserRoom.where(user_id: current_user.id)
+      @another_user_room = UserRoom.where(user_id: @user.id)
+      unless @user.id == current_user.id
+        @current_user_room.each do |current|
+          @another_user_room.each do |another|
+            if (current.room_id == another.room_id) && (current.request_id == another.request_id) && (another.request_id == @request.id)
+              @is_room = true
+              @room_id = current.room_id
+            end
           end
         end
       end
-      unless @is_room
-        @room = Room.new
-        @user_room = User.new
-      end
     end
+  end
+
+  def inquiry
+    @request = Request.find(params[:id])
+    @user = @request.user
+    @room = Room.new
+    @user_room = UserRoom.new
+    @chat = Chat.new
   end
 
   def edit
@@ -52,7 +60,7 @@ class Public::RequestsController < ApplicationController
       end
     end
     if request.update(request_params)
-      flash[:success] = "編集しました"
+      flash[:notice] = "編集しました"
       redirect_to request_path
     else
       render :edit
@@ -62,7 +70,7 @@ class Public::RequestsController < ApplicationController
   def destroy
     @request = Request.find(params[:id])
     @request.destroy
-    flash[:success] = "作成しました"
+    flash[:alert] = "削除しました"
     redirect_to requests_path
   end
 
@@ -70,6 +78,11 @@ class Public::RequestsController < ApplicationController
   end
 
   private
+
+  def search_product
+    @p = Request.ransack(params[:q])  # 検索オブジェクトを生成
+    @results = @p.result.page(params[:page]).per(10)
+  end
 
   def request_params
     params.require(:request).permit(:user_id, :prefecture_id, :title, :breed, :size, :sex, :age, :vaccine, :surgery, :pattern, :information, request_images: [])

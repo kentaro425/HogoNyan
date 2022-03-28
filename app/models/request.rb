@@ -7,7 +7,7 @@ class Request < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many_attached :request_images
   enum breed: {
-    ー猫種を選択してくださいー: 0, 雑種: 1, ミヌエット: 2, アメリカンショートヘア: 3
+    雑種: 0,マンチカン: 1, ミヌエット: 2, アメリカンショートヘア: 3
   }
 
   enum size: {

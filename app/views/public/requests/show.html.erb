@@ -5,38 +5,70 @@
         <h5><%= @request.title %></h5>
       </div>
       <div class="row">
-        <% @request.request_images.each do |image| %>
-          <%= image_tag(image, width:100) %>
-        <% end %>
+        <div id="carouselExampleIndicators" class="carousel slide col mx-auto" style="max-width: 30rem;">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <% @request.request_images.drop(1).count.times do |index| %>
+              <li data-target="#carouselExampleIndicators" data-slide-to="#{index}"></li>
+            <% end %>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <% @request.request_images.first(1).each do |image| %>
+                <%= image_tag image, class: "carousel_image w-100" %>
+              <% end %>
+            </div>
+            <% @request.request_images.drop(1).each do |image| %>
+              <div class="carousel-item">
+                <%= image_tag image, class: "carousel_image  w-100" %>
+              </div>
+            <% end %>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
       </div>
-      <table class="table">
+      <table class="table mt-4">
         <tr>
-          <th>状況</th>
-          <td><%= @request.status %></td>
-          <td colspan="2"></td>
+          <th class="table-active">状況</th>
+          <td colspan=2><%= @request.status %></td>
+          <td>
+            <% if user_signed_in? %>
+              <% if @request.user.id == current_user.id %>
+                <%= link_to "編集", edit_request_path(@request), class: "btn btn-success" %>
+                <%= link_to "削除", request_path(@request), method: :delete, "data-confirm" => "本当に削除しますか?", class: "btn btn-danger" %>
+              <% end %>
+            <% end %>
+          </td>
         </tr>
         <tr>
-          <th>種類</th>
+          <th class="table-active">種類</th>
           <td><%= @request.breed %></td>
-          <th>サイズ</th>
+          <th class="table-active">サイズ</th>
           <td><%= @request.size %></td>
         </tr>
         <tr>
-          <th>性別</th>
+          <th class="table-active">性別</th>
           <td><%= @request.sex_i18n %></td>
-          <th>年齢</th>
+          <th class="table-active">年齢</th>
           <td><%= @request.age %></td>
         </tr>
         <tr>
-          <th>ワクチン接種</th>
+          <th class="table-active">ワクチン接種</th>
           <td><%= @request.vaccine_i18n %></td>
-          <th>去勢／避妊</th>
+          <th class="table-active">去勢／避妊</th>
           <td><%= @request.surgery_i18n %></td>
         </tr>
         <tr>
-          <th>猫の所在地</th>
+          <th class="table-active">猫の所在地</th>
           <td><%= @request.prefecture.region.name %>>><%= @request.prefecture.name %></td>
-          <th>毛の柄</th>
+          <th class="table-active">毛の柄</th>
           <td><%= @request.pattern %></td>
         </tr>
       </table>
@@ -46,21 +78,20 @@
           <td><%= @request.information %></td>
         </tr>
       </table>
-      <div>
-        <% unless @user.id == current_user.id %>
-          <% if @is_room == true %>
-            <%= link_to "お問い合わせ確認へ", room_path(@room_id) %>
-          <% else %>
-            <%= form_with model: @room, local: true do |f| %>
-              <%#= fields_for @user_room do |e| %>
-                <%= f.hidden_field :user_id, value: @user.id %>
-                <%= f.hidden_field :request_id, value: @request.id %>
-              <%# end %>
-              <%= f.submit "お問い合わせへ", class:"btn btn-primary btn-lg" %>
+      <% if user_signed_in? %>
+        <div class>
+          <% unless @user.id == current_user.id %>
+            <% if @is_room == true %>
+              <%= link_to "お問い合わせ確認へ", room_path(@room_id), class: "btn btn-warning btn-block" %>
+            <% else %>
+              <%= link_to "お申し込み・お問い合わせへ", inquiry_request_path(@request), class: "btn btn-warning btn-block" %>
             <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% else %>
+        <%= link_to "お問い合わせはログインまたは新規会員登録してください", new_user_registration_path, class: "btn btn-warning btn-block" %>
+      <% end %>
     </div>
   </div>
 </div>
+

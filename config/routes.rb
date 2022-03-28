@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         get 'requester_edit'
         get 'sns_edit'
         patch 'requester_update'
+        patch 'sns_update'
         get 'unsubscribe'
         patch 'withdraw'
         get 'favorites'
@@ -46,6 +47,10 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
+      member do
+        get "inquiry"
+      end
+
       resource :favorites, only: [:create, :destroy]
     end
 

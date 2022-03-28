@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <h3 class="p-3">里親申し込み・お問い合わせフォーム</h3>
+  </div>
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <div class="row mb-3">
+        <div class="col-4 d-flex" style="height: 13rem;">
+          <% if @request.request_images.count > 0 %>
+            <%= image_tag @request.request_images.first, class: "h-100 mx-auto" %>
+          <% end %>
+        </div>
+        <div class="col-8 table-responsive-lg">
+          <table class="table table-bordered">
+            <tr>
+              <th class="table-active">猫種</th>
+              <td colspan=3><%= @request.breed %></td>
+            </tr>
+            <tr>
+              <th class="table-active">性別</th>
+              <td><%= @request.sex_i18n %></td>
+              <th class="table-active">年齢</th>
+              <td><%= @request.age %></td>
+            </tr>
+            <tr>
+              <th class="table-active">猫所在地</th>
+              <td><%= @request.prefecture.name %></td>
+              <th class="table-active">状況</th>
+              <td><%= @request.status %></td>
+            </tr>
+            <tr>
+              <th class="table-active">募集者名</th>
+              <td colspan=3><%= @request.user.last_name + @request.user.first_name %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered">
+      <tr>
+        <th>
+          <p>募集者へのメッセージ</p>
+          <p class="btn btn-sm btn-outline-danger text-right">必須</p>
+        </th>
+        <td>
+          <%= form_with model: @room, local: true do |f| %>
+            <%= f.text_area :content, placeholder: "メッセージを入力してください", class: "form-control" %>
+            <%= f.hidden_field :user_id, value: @user.id %>
+            <%= f.hidden_field :request_id, value: @request.id %>
+            <p>
+              （例）保護されている子を迎え、1つでも多くの命を助けたいと思い、里親を希望しました。<br>
+              飼い主としての自覚を持ち、この子が生涯幸せに暮らせるよう責任をもってお世話したいと思っています。<br>
+              是非家族の一員として迎えたいので、ご検討お願いします。<br>
+              <br>
+              この子を希望する理由や、迎え入れに対する想いなどをご入力ください。<br>
+              里親募集者に迎えるにあたっての考えをしっかり伝えることで、譲渡への可能性が広がります。<br>
+
+              ※個人情報のご記入は、お客様ご自身のご判断のうえ行ってください。
+            </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col-2 mx-auto">
+      <%= f.submit "送信する", class: "btn btn-warning btn-block" %>
+      <% end %>
+    </div>
+  </div>
+</div>

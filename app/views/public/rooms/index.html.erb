@@ -1,26 +1,36 @@
 <div class="container">
-  <% @another_user_rooms.each do |room| %>
   <div class="row">
-    <div class="col-2">
-      <% if room.request.request_images.count > 0 %>
-        <%= image_tag room.request.request_images.first, class: "img-thumbnail" %>
-      <% end %>
-    </div>
-    <div class="col-2">
-        <%= link_to room_path(room.room) do %>
-          <%= room.request.title %>
-        <% end %>
-    </div>
-    <div class="col-2">
-      <%= room.user.nickname %>
-    </div>
-    <div class="col-4">
-      <% if room.room.chats.present? %>
-        <%= Chat.find_by(id: room.room.chat_ids.last).content %>
-      <% else %>
-        <p>メッセージはまだありません</p>
-      <% end %>
+    <div class="col-10 mx-auto">
+      <h5 class="p3">取引一覧</h5>
+        <table class="table">
+          <tr>
+            <therd>
+              <th colspan=4></th>
+            </therd>
+          </tr>
+          <% @another_user_rooms.each do |room| %>
+          <tr>
+            <td class="align-middle">
+              <% if room.request.request_images.count > 0 %>
+                <%= image_tag room.request.request_images.first, size: "100x100", class: "img-thumbnail" %>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= link_to room_path(room.room) do %>
+                <%= room.request.title %>
+              <% end %>
+            </td>
+            <td class="align-middle"><%= room.user.nickname %></td>
+            <td class="align-middle text-nowrap">
+              <% if room.room.chats.present? %>
+                <%= Chat.find_by(id: room.room.chat_ids.last).content %>
+              <% else %>
+                <p>メッセージはまだありません</p>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </table>
     </div>
   </div>
-  <% end %>
 </div>

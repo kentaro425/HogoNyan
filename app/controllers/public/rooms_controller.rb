@@ -3,6 +3,7 @@ class Public::RoomsController < ApplicationController
     room = Room.create
     @current_user_room = UserRoom.create(user_id: current_user.id, room_id: room.id, request_id: params[:room][:request_id])
     @another_user_room = UserRoom.create(user_id: params[:room][:user_id], room_id: room.id, request_id: params[:room][:request_id])
+    @chat = Chat.create(user_id: current_user.id, room_id: room.id, content: params[:room][:content])
     redirect_to room_path(room)
   end
 
@@ -19,9 +20,10 @@ class Public::RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @chats = @room.chats.all
+    @chats = @room.chats
     @chat = Chat.new
     @user_rooms = @room.user_rooms
     @another_user_room = @user_rooms.where.not(user_id: current_user.id).first
+    @request = Request.find(@another_user_room.request_id)
   end
 end

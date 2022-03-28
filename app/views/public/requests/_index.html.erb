@@ -1,27 +1,30 @@
 <div class="row">
   <div class="col-9 mx-auto">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
       <% requests.each do |request| %>
-        <div class="card mx-3" style="width: 10rem;">
-          <div id="favorite_buttons_<%= request.id %>">
+        <div class="card mx-3 mb-3 shadow-sm" style="width: 13rem;">
+          <div id="favorite_buttons_<%= request.id %>" class="ml-auto">
         　　　<%= render "public/favorites/favorites", request: request %>
         　</div>
-          <%= link_to request_path(request) do %>
-            <div class="card-image">
+          <%= link_to request_path(request), class: "text-decoration-none" do %>
+            <div class="d-flex justify-content-center align-items-center border-bottom"  style="height: 13rem;">
               <% if request.request_images.count > 0 %>
                 <%= image_tag request.request_images.first, class: "request-image" %>
               <% end %>
             </div>
-            <div class="card-body">
-              <p class="card-text text-truncate text-dark"><%= request.title %></p>
-              <p class="card-text"><%= request.breed %></p>
-              <p class="card-text"><%= request.age %></p>
-              <p class="card-text"><%= request.sex_i18n %></p>
-              <p class="card-text"><%= request.prefecture.name %></p>
+            <div class="card-body text-dark">
+              <div class="text-truncate"><%= request.title %></div>
+              <div class=""><small><%= request.breed %></small></div>
+              <div class=""><span class="badge badge-secondary mr-3">年齢</span><%= request.age %></div>
+              <div class=""><span class="badge badge-secondary mr-3">性別</span><%= request.sex_i18n %></div>
+              <div class=""><span class="badge badge-secondary mr-1">所在地</span><%= request.prefecture.name %></div>
             </div>
           <% end %>
         </div>
       <% end %>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= paginate requests %>
     </div>
   </div>
 </div>

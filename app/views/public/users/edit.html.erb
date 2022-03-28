@@ -1,53 +1,45 @@
 <div class="container">
   <div class="row">
+    <h3 class="p-3"><%= @user.last_name + @user.first_name%>さんの会員情報編集</h3>
+  </div>
+  <div class="row">
     <div class="col-10 mx-auto">
-      <h3>会員情報編集</h3>
       <%= form_with model: @user, url: user_path, local: true  do |f| %>
-        <div class="row">
-          <%= f.label :メールアドレス %>
-        </div>
-        <div class="row">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        </div>
-        <div class="row">
-          <%= f.label :お名前 %>
-        </div>
-        <div class="row">
-          <%= f.label :性 %><%= f.text_field :last_name %><%= f.label :名 %><%= f.text_field :first_name, autofocus: true %>
-        </div>
-        <div class="row">
-          <%= f.label :お名前カナ %>
-        </div>
-        <div class="row">
-          <%= f.label :セイ %><%= f.text_field :last_name_kana %><%= f.label :メイ %><%= f.text_field :first_name_kana %>
-        </div>
-        <div class="row">
-          <%= f.label :ニックネーム %>
-        </div>
-        <div class="row">
-          <%= f.text_field :nickname %>
-        </div>
-        <div class="row">
-          <%= f.label :郵便番号（ハイフンなし） %>
-        </div>
-        <div class="row">
-          <%= f.text_field :postal_code %>
-        </div>
-        <div class="row">
-          <%= f.label :ご住所 %>
-        </div>
-        <div class="row">
-          <%= f.text_field :address %>
-        </div>
-        <div class="row">
-          <%= f.label :電話番号（ハイフンなし） %>
-        </div>
-        <div class="row">
-          <%= f.text_field :phone %>
-        </div>
-        <div class="actions">
-          <%= f.submit "更新する" %>
-        </div>
+      <table class="table table-hover table-bordered">
+        <tr>
+          <th class="table-active">メールアドレス</th>
+          <td><%= f.email_field :email, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">お名前</th>
+          <td class="d-flex"><%= f.label :性, class: "col-form-label mr-1" %><%= f.text_field :last_name, autofocus: true, class: "form-control" %></td>
+          <td class="d-flex"><%= f.label :名, class: "col-form-label mr-1" %><%= f.text_field :first_name, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">フリガナ</th>
+          <td class="d-flex"><%= f.label :セイ, class: "col-form-label mr-1" %><%= f.text_field :last_name_kana, class: "form-control" %></td>
+          <td class="d-flex"><%= f.label :メイ, class: "col-form-label mr-1" %><%= f.text_field :first_name_kana, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">ニックネーム</th>
+          <td><%= f.text_field :nickname, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">郵便番号（ハイフンなし）</th>
+          <td><%= f.text_field :postal_code, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">ご住所</th>
+          <td><%= f.text_field :address, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th class="table-active">お電話番号</th>
+          <td><%= f.text_field :phone, class: "form-control" %></td>
+        </tr>
+      </table>
+      <div class="d-flex justify-content-center">
+        <%= f.submit "更新する", class: "btn btn-success" %>
+      </div>
       <% end %>
     </div>
   </div>

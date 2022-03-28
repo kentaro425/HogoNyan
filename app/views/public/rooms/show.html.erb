@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <h5 class="p-3"><%= @another_user_room.user.last_name %>さんとの取引</h3>
+  </div>
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <div class="row mb-5">
+        <div class="col-md-4 d-flex" style="height: 13rem;">
+          <% if @request.request_images.count > 0 %>
+            <%= image_tag @request.request_images.first, class: "h-100 mx-auto" %>
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <table class="table table-bordered">
+            <tr>
+              <th class="table-active">猫種</th>
+              <td colspan=3><%= @request.breed %></td>
+            </tr>
+            <tr>
+              <th class="table-active">性別</th>
+              <td><%= @request.sex_i18n %></td>
+              <th class="table-active">年齢</th>
+              <td><%= @request.age %></td>
+            </tr>
+            <tr>
+              <th class="table-active">猫所在地</th>
+              <td><%= @request.prefecture.name %></td>
+              <th class="table-active">状況</th>
+              <td><%= @request.status %></td>
+            </tr>
+            <tr>
+              <th class="table-active">募集者名</th>
+              <td colspan=3><%= @request.user.last_name + @request.user.first_name %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-9 mx-auto bg-light">
+      <% @chats.each do |chat| %>
+        <% if chat.user_id == current_user.id %>
+          <div class="row">
+            <div class="col-6 ml-auto">
+               <p class="text-right mb-0"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+              <p class="rounded bg-secondary text-white text-break p-2"><%= chat.content %></p>
+            </div>
+          </div>
+        <% else %>
+          <div class="row">
+            <div class="col-6 mr-auto">
+              <p class="text-left mb-0"><%= chat.created_at.strftime("%Y/%m/%d %H:%M")%></p>
+              <p class="rounded bg-white text-break p-2 border border-secondary"><%= chat.content %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="row mt-5">
+        <div class="col-12">
+          <%= form_with model: @chat, local: true, class: "input-group" do |f| %>
+            <%= f.text_field :content, placeholder: "メッセージを入力して下さい" , class: "form-control" %>
+            <%= f.hidden_field :room_id, value: @room.id %>
+            <%= f.submit "送信", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
