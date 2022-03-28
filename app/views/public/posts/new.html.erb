@@ -1,8 +1,8 @@
 <%= render 'header' %>
 <div class="container">
   <div class="row">
-    <div class="col-4 mx-auto">
-      <h3>新規投稿を作成</h3>
+    <div class="col-md-4 mx-auto">
+      <h5 class="d-flex justify-content-center">新規投稿を作成</h5>
       <%= form_with model: @post, local: true  do |f| %>
         <div class="form-group">
           <%= f.label :post_images, '画像' %><br>
@@ -10,14 +10,14 @@
         </div>
         <div class="form-group">
           <%= f.label :body, '本文' %><br>
-          <%= f.text_area :body %>
+          <%= f.text_area :body, rows: 6, class: "form-control" %>
         </div>
         <div class="form-group">
           <%= f.label :name,'タグ (,で区切ると複数タグ登録できます)' %>
-          <%= f.text_field :name %>
+          <%= f.text_field :name, class: "form-control" %>
         </div>
-        <div class="form-group">
-          <%= f.submit "登録する" %>
+        <div class="form-group d-flex justify-content-center">
+          <%= f.submit "登録する", class: "btn btn-success" %>
         </div>
       <% end %>
     </div>

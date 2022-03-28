@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-md-4 mx-auto">
       <h3>募集者情報編集</h3>
       <%= form_with model: @user, url: requester_update_user_path, method: :patch, local: true  do |f| %>
         <div class="row">
@@ -16,7 +16,7 @@
           <%= f.label :募集者プロフィール %>
         </div>
         <div class="row">
-          <%= f.text_area :introduction %>
+          <%= f.text_area :introduction, class: "form-control" %>
         </div>
         <div class="row">
           <%= f.label :募集者紹介写真 %>
@@ -24,8 +24,8 @@
         <div class="row">
           <%= f.file_field :requester_image, accept: "image/*" %>
         </div>
-        <div class="actions">
-          <%= f.submit "更新する" %>
+        <div class="d-flex justify-content-center mt-5">
+          <%= f.submit "更新する", class: "btn btn-success" %>
         </div>
       <% end %>
     </div>

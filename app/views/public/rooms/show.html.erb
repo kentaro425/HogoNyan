@@ -5,12 +5,12 @@
   <div class="row">
     <div class="col-12 mx-auto">
       <div class="row mb-5">
-        <div class="col-4 d-flex" style="height: 13rem;">
+        <div class="col-md-4 d-flex" style="height: 13rem;">
           <% if @request.request_images.count > 0 %>
             <%= image_tag @request.request_images.first, class: "h-100 mx-auto" %>
           <% end %>
         </div>
-        <div class="col-8">
+        <div class="col-md-8">
           <table class="table table-bordered">
             <tr>
               <th class="table-active">猫種</th>

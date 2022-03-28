@@ -1,17 +1,10 @@
 // Place all the styles related to the public/requests controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.card-image {
-  width: 160px;
-  height: 160px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .request-image {
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 12rem;
+  max-height: 12rem;
   width: auto;
   height: auto;
 }

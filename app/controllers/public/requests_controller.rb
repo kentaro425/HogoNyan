@@ -6,7 +6,7 @@ class Public::RequestsController < ApplicationController
   end
 
   def index
-    @requests = Request.all
+    @requests = Request.page(params[:page]).per(10)
   end
 
   def create
@@ -60,7 +60,7 @@ class Public::RequestsController < ApplicationController
       end
     end
     if request.update(request_params)
-      flash[:success] = "編集しました"
+      flash[:notice] = "編集しました"
       redirect_to request_path
     else
       render :edit
@@ -70,7 +70,7 @@ class Public::RequestsController < ApplicationController
   def destroy
     @request = Request.find(params[:id])
     @request.destroy
-    flash[:success] = "作成しました"
+    flash[:alert] = "削除しました"
     redirect_to requests_path
   end
 
@@ -81,7 +81,7 @@ class Public::RequestsController < ApplicationController
 
   def search_product
     @p = Request.ransack(params[:q])  # 検索オブジェクトを生成
-    @results = @p.result
+    @results = @p.result.page(params[:page]).per(10)
   end
 
   def request_params

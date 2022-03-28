@@ -1,19 +1,31 @@
 <%= render 'public/posts/header' %>
 <div class="container">
   <div class="row">
-    <%= search_form_for @p, url: search_posts_path do |f| %>
-      <%= f.text_field :body_or_tags_name_cont, placeholder: "キーワードから探す", class: "input-box" %>
-    <% end %>
-    <div class="col-6 mx-auto">
+    <div class="col-sm-6 mx-auto">
+      <div class="row mb-3">
+        <div class="mx-auto" style="width: 30rem;">
+          <%= search_form_for @p, url: search_posts_path, class: "input-group" do |f| %>
+            <%= f.text_field :tags_name_or_user_nickname_eq, placeholder: "キーワードから探す", class: "form-control" %>
+            <%= f.submit "検索", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
       <% @posts.each do |post| %>
         <div class="row">
-          <div class="card mx-auto" style="width: 30rem;">
-            <%= link_to sns_home_user_path(post.user.id) do %>
-              <%= post.user.nickname %>
-            <% end %>
+          <div class="card mx-auto mb-2" style="width: 30rem;">
+            <div class="my-1">
+              <%= link_to sns_home_user_path(post.user.id), class: "text-brown text-decoration-none" do %>
+                <% if post.user.sns_image.attached? %>
+                  <%= image_tag post.user.sns_image, size: '50x50', class: "rounded-circle img-thumbnail m-1" %>
+                <% else %>
+                  <%= image_tag 'no_image', size: '50x50', class: "rounded-circle img-thumbnail my-1 mx-2" %>
+                <% end %>
+                <%= post.user.nickname %>
+              <% end %>
+            </div>
             <div>
               <% if post.post_images.count > 0 %>
-                <%= image_tag post.post_images.first, class: "img-thumbnail" %>
+                <%= image_tag post.post_images.first, class: "post-index-imag img-thumbnail" %>
               <% end %>
             </div>
             <div class="card-body">
@@ -21,13 +33,15 @@
           　　  　<%= render "public/sns_favorites/favorites", post: post %>
         　     </div>
               <p class="card-text"><%= post.body %></p>
-              <p class="card-text">🐱<%= post.tags.map(&:name).join(' 🐱') %></p>
+              <p class="card-text">#<%= post.tags.map(&:name).join(' #') %></p>
               <%= link_to post_path(post) do %>
                 <p class="card-text text-secondary">
                 コメント<%= post.comments.count %>件をすべて見る
                 </p>
               <% end %>
-              <%= render 'public/comments/form', comment: @comment, post: post %>
+              <% if user_signed_in? %>
+                <%= render 'public/comments/form', comment: @comment, post: post %>
+              <% end %>
             </div>
           </div>
         </div>

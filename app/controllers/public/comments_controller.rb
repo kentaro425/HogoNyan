@@ -10,7 +10,7 @@ class Public::CommentsController < ApplicationController
       redirect_to post_path(@post), notice: 'コメントを投稿しました'
     else
       @posts = Post.all
-      render 'public/posts/index'
+      render 'public/posts/show'
     end
   end
 
