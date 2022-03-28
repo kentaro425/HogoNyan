@@ -87,5 +87,4 @@ class Public::RequestsController < ApplicationController
   def request_params
     params.require(:request).permit(:user_id, :prefecture_id, :title, :breed, :size, :sex, :age, :vaccine, :surgery, :pattern, :information, request_images: [])
   end
-
 end

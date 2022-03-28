@@ -2,7 +2,7 @@ class Public::FavoritesController < ApplicationController
   before_action :set_request
 
   def create
-    @favorite = Favorite.new(user_id: current_user.id,  request_id: @request.id)
+    @favorite = Favorite.new(user_id: current_user.id, request_id: @request.id)
     @favorite.save
   end
 

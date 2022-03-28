@@ -28,14 +28,16 @@ class User < ApplicationRecord
 
   enum status: { common: 0, requester: 1 }
 
-    # フォローしたときの処理
+  # フォローしたときの処理
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
+
   # フォローを外すときの処理
   def unfollow(user_id)
     relationships.find_by(followed_id: user_id).destroy
   end
+
   # フォローしているか判定
   def following?(user)
     followings.include?(user)
@@ -43,7 +45,7 @@ class User < ApplicationRecord
 
   # <---フォロー通知--->
   def create_notification_follow!(current_user)
-    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ", current_user.id, id, 'follow'])
     if temp.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,
@@ -55,7 +57,7 @@ class User < ApplicationRecord
 
   # <---ユーザーステーテス変更通知--->
   def create_notification_user!(current_user)
-    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, nil, 'user_status'])
+    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ", current_user.id, nil, 'user_status'])
     if temp.blank?
       notification = current_user.active_notifications.new(
         action: 'user_status'
@@ -63,5 +65,4 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-
 end
