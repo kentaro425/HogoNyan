@@ -37,7 +37,15 @@
       <table class="table mt-4">
         <tr>
           <th class="table-active">状況</th>
-          <td colspan=3><%= @request.status %></td>
+          <td colspan=2><%= @request.status %></td>
+          <td>
+            <% if user_signed_in? %>
+              <% if @request.user.id == current_user.id %>
+                <%= link_to "編集", edit_request_path(@request), class: "btn btn-success" %>
+                <%= link_to "削除", request_path(@request), method: :delete, "data-confirm" => "本当に削除しますか?", class: "btn btn-danger" %>
+              <% end %>
+            <% end %>
+          </td>
         </tr>
         <tr>
           <th class="table-active">種類</th>
@@ -71,17 +79,17 @@
         </tr>
       </table>
       <% if user_signed_in? %>
-      <div class>
-        <% unless @user.id == current_user.id %>
-          <% if @is_room == true %>
-            <%= link_to "お問い合わせ確認へ", room_path(@room_id), class: "btn btn-warning btn-block" %>
-          <% else %>
-            <%= link_to "お申し込み・お問い合わせへ", inquiry_request_path(@request), class: "btn btn-warning btn-block" %>
+        <div class>
+          <% unless @user.id == current_user.id %>
+            <% if @is_room == true %>
+              <%= link_to "お問い合わせ確認へ", room_path(@room_id), class: "btn btn-warning btn-block" %>
+            <% else %>
+              <%= link_to "お申し込み・お問い合わせへ", inquiry_request_path(@request), class: "btn btn-warning btn-block" %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
       <% else %>
-      お問い合わせはログインまたは新規会員登録してください
+        <%= link_to "お問い合わせはログインまたは新規会員登録してください", new_user_registration_path, class: "btn btn-warning btn-block" %>
       <% end %>
     </div>
   </div>

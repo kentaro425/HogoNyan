@@ -1,58 +1,95 @@
 <%= render 'public/posts/header' %>
 <div class="container">
-  <div class="row">
-    <div class="col-3 offset-2">
-      <%= @user.sns_image %>
+  <div class="row mb-6 justify-content-center">
+    <div class="col-md-3 d-flex justify-content-center">
+      <% if @user.sns_image.attached? %>
+        <%= image_tag @user.sns_image, size: "130x130", class: "rounded-circle img-thumbnail" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "130x130", class: "rounded-circle img-thumbnail" %>
+      <% end %>
     </div>
-    <div class="col-5">
+    <div class="col-md-6 mt-2">
       <div class="row">
-        <div class="col-6 pl-0">
+        <div class="col-6 d-flex justify-content-center">
           <%= @user.nickname %>
         </div>
-        <div class="col-6">
+        <div class="col-6 d-flex justify-content-center">
           <% if user_signed_in? %>
             <% if @user.id == current_user.id %>
               <%= link_to "プロフィールを編集", sns_edit_user_path(@user), class: "btn btn-outline-secondary btn-sm" %>
             <% elsif current_user.following?(@user) %>
-              <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
+              <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-outline-secondary btn-sm" %>
             <% else %>
-              <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
+              <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-primary btn-sm" %>
             <% end %>
           <% else %>
           <% end %>
         </div>
       </div>
-      <div class="row mt-3">
+      <div class="row mt-3 d-flex justify-content-center">
         <div class="mr-4">
           投稿 <%= @user.posts.count %> 件
         </div>
         <div class="mr-4">
-          <%= link_to  followers_user_relationships_path(@user) do %>
+          <%= link_to  followers_user_relationships_path(@user), class: "text-decoration-none text-brown" do %>
             フォロワー <%= @user.followers.count %> 人
           <% end %>
         </div>
         <div>
-          <%= link_to  followings_user_relationships_path(@user) do %>
+          <%= link_to  followings_user_relationships_path(@user), class: "text-decoration-none text-brown" do %>
             フォロー中 <%= @user.followings.count %> 人
           <% end %>
         </div>
       </div>
-      <div class="row mt-3">
+      <div class="row mt-3 d-flex justify-content-center">
         <%= @user.profile %>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-8 mx-auto">
-      <% @user.posts.each do |post| %>
-        <div class="col-4">
-          <%= link_to sns_home_user_path(@user) do %>
-            <% if post.post_images.count > 0 %>
-              <%= image_tag post.post_images.first, class: "img-fluid" %>
+  <div class="row pt-5">
+    <div class="col-12  d-flex justify-content-center">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active text-dark" id="item1-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">投稿一覧</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false">いいね一覧</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row pt-0">
+    <div class="tab-content col-md-8 mx-auto">
+      <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+        <div class="">
+          <div class="row">
+            <% @user.posts.each do |post| %>
+              <div class="col-4 p-0 d-flex justify-content-center align-items-center">
+                <%= link_to post_path(post) do %>
+                  <% if post.post_images.count > 0 %>
+                    <%= image_tag post.post_images.first.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed, class: "img-fluid" %>
+                  <% end %>
+                <% end %>
+              </div>
             <% end %>
-          <% end %>
+          </div>
         </div>
-      <% end %>
+      </div>
+      <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="item2-tab">
+        <div class="">
+          <div class="row">
+            <% @favorite_posts.each do |post| %>
+              <div class="col-4 p-0 d-flex justify-content-center align-items-center">
+                <%= link_to post_path(post) do %>
+                  <% if post.post_images.count > 0 %>
+                    <%= image_tag post.post_images.first.variant(gravity: :center, resize:"200x200^", crop:"200x200+0+0").processed, class: "img-fluid" %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

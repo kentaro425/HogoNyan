@@ -1,0 +1,5 @@
+<% flash.each do |key, value| %>
+    <p class="d-flex justify-content-center alert alert-<%= key %>">
+      <%= value %>
+    </p>
+<% end %>

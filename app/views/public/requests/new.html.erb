@@ -1,20 +1,24 @@
 <div class="container">
   <div class="row">
-    <div class="col-8 mx-auto">
+    <div class="col-md-5 mx-auto">
       <h3>里親募集情報を登録</h3>
       <%= form_with model: @request, url: requests_path, local: true  do |f| %>
         <div class="form-group">
-          <%= f.label :募集タイトル %><%= f.text_field :title %>
+          <%= f.label :募集タイトル %><br>
+          <%= f.text_field :title, class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label :猫種 %><%= f.select :breed, Request.breeds.keys, {prompt: "選択してください"} %>
+          <%= f.label :猫種 %><br>
+          <%= f.select :breed, Request.breeds.keys, {prompt: "選択してください"}, class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label :毛の色／柄 %><%= f.text_field :pattern %>
+          <%= f.label :毛の色／柄 %><br>
+          <%= f.text_field :pattern, class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label :サイズ %><%= f.select :size, Request.sizes.keys, {prompt: "選択してください"} %><br/>
-          <p>※小型：成猫体重3.5kg未満、中型：成猫体重4.5kg未満、大型：成猫体重4.5kg以上</p>
+          <%= f.label :サイズ %><br>
+          <%= f.select :size, Request.sizes.keys, {include_blank: "--選択してください--"}, class: "form-control" %><br/>
+          <p><small>※小型：成猫体重3.5kg未満、中型：成猫体重4.5kg未満、大型：成猫体重4.5kg以上</small></p>
         </div>
         <div class="form-group">
           <%= f.label :性別 %><br>
@@ -26,7 +30,8 @@
           <%= f.label :sex, Request.sexes_i18n[:female]%>
         </div>
         <div class="form-group">
-          <%= f.label :年齢 %><%= f.text_field :age, placeholder: "おおよその年齢（◯歳◯ヶ月）" %>
+          <%= f.label :年齢 %><br>
+          <%= f.text_field :age, placeholder: "おおよその年齢（◯歳◯ヶ月）", class: "form-control" %>
         </div>
         <div class="form-group">
           <%= f.label :ワクチン接種の有無 %><br>
@@ -48,17 +53,17 @@
         </div>
         <div class="form-group">
           <%= f.label :猫の現在所在地 %><br>
-          <%=  f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "--選択してください--"} %>
+          <%=  f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "--選択してください--"}, class: "form-control" %>
         </div>
         <div class="form-group">
           <%= f.label :request_images, '画像' %><br>
           <%= f.file_field :request_images, multiple: true %>
         </div>
         <div class="form-group">
-          <%= f.label :詳細情報 %><%= f.text_area :information, value: text_information, class:"form-control" %>
+          <%= f.label :詳細情報 %><%= f.text_area :information, value: text_information, rows: 20, class:"form-control" %>
         </div>
-        <div class="form-group">
-          <%= f.submit "登録する" %>
+        <div class="form-group d-flex justify-content-center">
+          <%= f.submit "登録する", class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>

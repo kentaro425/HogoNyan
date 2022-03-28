@@ -4,26 +4,26 @@
       <div class="row border rounded p-4">
         <div class="col-md-4 mb-3">
           <th><%= f.label :prefecture_id_eq, '地域' %></th>
-          <td><%= f.collection_select :prefecture_id_eq, Prefecture.where.not(id: 0), :id, :name, class: 'form-control', include_blank: '指定なし' %></td>
+          <td><%= f.collection_select :prefecture_id_eq, Prefecture.where.not(id: 0), :id, :name, {include_blank: '指定なし'}, class: 'form-control' %></td>
         </div>
         <div class="col-md-4 mb-3">
           <td colspan=2></td>
         </div>
         <div class="col-md-4 mb-3">
           <th><%= f.label :breed_eq, '猫種', class: 'label' %></th>
-          <td><%= f.select :breed_eq, Request.breeds.map{|k,v| [Request.breeds_i18n[k], v]}, class: 'form-control',  include_blank: '指定なし' %></td>
+          <td><%= f.select :breed_eq, Request.breeds.map{|k,v| [Request.breeds_i18n[k], v]}, {include_blank: '指定なし'}, class: 'form-control' %></td>
         </div>
         <div class="col-md-4 mb-3">
           <th><%= f.label :status_eq, '状況', class: 'label' %></th>
-          <td><%= f.select :status_eq, Request.statuses.map{|k,v| [Request.statuses_i18n[k], v]},  include_blank: '指定なし', class: 'form-control' %></td>
+          <td><%= f.select :status_eq, Request.statuses.map{|k,v| [Request.statuses_i18n[k], v]}, {include_blank: '指定なし'}, class: 'form-control' %></td>
         </div>
         <div class="col-md-4 mb-3">
           <th><%= f.label :size_eq, '大きさ', class: 'label' %></th>
-          <td><%= f.select :size_eq, Request.sizes.map{|k,v| [Request.sizes_i18n[k], v]},  include_blank: '指定なし', class: 'form-control' %></td>
+          <td><%= f.select :size_eq, Request.sizes.map{|k,v| [Request.sizes_i18n[k], v]}, {include_blank: '指定なし'}, class: 'form-control' %></td>
         </div>
         <div class="col-md-4 mb-3">
           <th><%= f.label :sex_eq, '性別', class: 'label' %></th>
-          <td><%= f.select :sex_eq, Request.sexes.map{|k,v| [Request.sexes_i18n[k], v]},  include_blank: '指定なし', class: 'form-control' %></td>
+          <td><%= f.select :sex_eq, Request.sexes.map{|k,v| [Request.sexes_i18n[k], v]}, {include_blank: '指定なし'}, class: 'form-control' %></td>
         </div>
         <div class="col-md-4 mx-auto ">
           <%= f.submit class: "btn btn-success btn-block"%>

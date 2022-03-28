@@ -24,7 +24,7 @@
                 <%= link_to "メッセージ", rooms_path,class: "nav-link mx-2 text-brown font-weight-bolder" %>
               </li>
               <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link mx-2 text-brown font-weight-bolder" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link mx-2 text-brown font-weight-bolder", "data-confirm" => "ログアウトしますか?" %>
               </li>
             <% elsif user_signed_in? %>
               <li>
@@ -40,7 +40,7 @@
                 <%= link_to "お気に入り", favorites_user_path(current_user),class: "nav-link mx-2 text-brown font-weight-bolder"  %>
               </li>
               <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link mx-2 text-brown font-weight-bolder" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link mx-2 text-brown font-weight-bolder", "data-confirm" => "ログアウトしますか?" %>
               </li>
             <% elsif admin_signed_in? %>
               <li>
@@ -53,7 +53,7 @@
                 <%= link_to "通知", admin_notifications_path,class: "text-brown font-weight-bolder mx-2 nav-link" %>
               </li>
               <li>
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: "text-brown font-weight-bolder mx-2 nav-link" %>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: "text-brown font-weight-bolder mx-2 nav-link", "data-confirm" => "ログアウトしますか?" %>
               </li>
             <% else %>
               <li>

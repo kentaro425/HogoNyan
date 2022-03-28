@@ -1,8 +1,14 @@
+<div class="d-flex justify-content-end">
+  <p><i class="far fa-comment fa-flip-horizontal"></i> <%= post.comments.count %>件</p>
+</div>
 <div class="comments">
   <% if post.comments.present? %>
-    <p>コメント件数：<%= post.comments.count %></p>
     <% post.comments.each do |comment| %>
-      <%= time_ago_in_words(comment.created_at).upcase %><%= comment.user.nickname %><%= comment.content %><br>
+      <%= link_to sns_home_user_path(post.user.id), class: "text-secondary text-decoration-none" do %>
+        <p class="small d-inline"><%= time_ago_in_words(comment.created_at).upcase %></p>
+        <p class="font-weight-bolder d-inline "><%= comment.user.nickname %></p>
+        <%= comment.content %><br>
+      <% end %>
     <% end %>
   <% else %>
     <p>コメントはまだありません</p>

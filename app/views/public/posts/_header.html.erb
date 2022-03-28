@@ -5,36 +5,36 @@ header {
 }
 </style>
 </head>
-<nav class="navbar navbar-expand navbar-light bg-cream ">
+<nav class="navbar navbar-expand navbar-light bg-cream mb-5">
   <div class="container">
-    <%= link_to posts_path, class: "navbar-brand" do %>
+    <%= link_to posts_path, class: "navbar-brand mr-0" do %>
       <h4 class="text-brown font-italic">HogoNyan</h4>
     <% end %>
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in? && current_user.is_active == true %>
         <li>
-          <%= link_to requests_path, class: "mx-2 nav-link" do %>
+          <%= link_to requests_path, class: "mr-2 nav-link", 'data-toggle': :'tooltip', 'title': :'保護猫サイトへ' do %>
             <i class="fas fa-h-square fa-2x text-brown"></i>
           <% end %>
         </li>
         <li>
-          <%= link_to new_post_path,class: "mx-2 nav-link" do %>
+          <%= link_to new_post_path,class: "mx-2 nav-link", 'data-toggle': :'tooltip', 'title': :'新規投稿' do %>
             <i class="fas fa-plus-square fa-2x text-brown"></i>
           <% end %>
         </li>
         <li>
-          <%= link_to sns_home_user_path(current_user),class: "mx-2 nav-link" do %>
+          <%= link_to sns_home_user_path(current_user),class: "mx-2 nav-link", 'data-toggle': :'tooltip', 'title': :'マイページへ' do %>
             <i class="fas fa-home fa-2x text-brown"></i>
           <% end %>
         </li>
         <li>
-          <%= link_to  user_notifications_path(current_user),class: "mx-2 nav-link" do %>
+          <%= link_to  user_notifications_path(current_user),class: "mx-2 nav-link", 'data-toggle': :'tooltip', 'title': :'通知一覧へ' do %>
             <i class="fas fa-bell fa-2x text-brown"></i>
           <% end %>
         </li>
       <% else %>
         <li>
-          <%= link_to requests_path,class: "mx-2 nav-link" do %>
+          <%= link_to requests_path,class: "mx-2 nav-link", 'data-toggle': :'tooltip', 'title': :'保護猫サイトへ' do %>
             <i class="fas fa-h-square fa-2x text-brown"></i>
           <% end %>
         </li>
