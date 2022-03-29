@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="row">
+<div class="container-fuild my-5">
+  <div class="row justify-content-center align-items-center mb-3">
     <h5>いいね一覧</h5><h5>(全<%= @favorite_requests.count %>)件</h5>
   </div>
   <%= render 'public/requests/index', requests: @favorite_requests %>

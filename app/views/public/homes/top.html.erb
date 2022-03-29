@@ -1,11 +1,17 @@
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid mt-0 d-flex align-items-end">
   <div class="container">
-    <h2 class="display-5 text-cream">猫の未来をあなたと共に</h2>
-    <p class="lead text-white">これは単純なヒーローユニット、注目のコンテンツや情報に特別な注意を喚起するためのシンプルなジャンボトロンスタイルのコンポーネントです。</p>
-    <a class="btn btn-outline-primary btn-lg" href="#" role="button">もっと学ぼう</a>
+    <h2 class="display-5 text-cream font-weight-bolder">猫の未来をあなたと共に</h2>
+    <div class="mb-5 lead text-white"></div>
+    <%= link_to "初めての方へ", about_path, class: "shadow mt-5 mx-2 text-white font-weight-bolder btn btn-outline-info btn-lg" %>
+    <%= link_to "会員登録はこちらから", new_user_registration_path, class: "shadow mt-5 mx-2 text-white font-weight-bolder btn btn-outline-info btn-lg" %>
   </div>
 </div>
-<div class="container">
-  <h1>ブランド</h1>
-  <p>ココにサイトの文章が入ります。</p>
-</div><!-- /.container -->
+<div class="container-fluid">
+  <%= render 'public/requests/form', p: @p %>
+  <div class="row">
+    <div class="col-9 mx-auto d-flex">
+      <h3>里親募集一覧</h3><h4>(全<%= @requests.count %>)件</h4>
+    </div>
+  </div>
+  <%= render 'public/requests/index', requests: @requests %>
+</div>

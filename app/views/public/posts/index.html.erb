@@ -23,11 +23,36 @@
                 <%= post.user.nickname %>
               <% end %>
             </div>
-            <div>
-              <% if post.post_images.count > 0 %>
-                <%= image_tag post.post_images.first, class: "post-index-imag img-thumbnail" %>
-              <% end %>
+            <!--carouselスライドショーここから-->
+            <div id="carousel_post_img<%= post.id %>" class="carousel slide col mx-auto" style="max-width: 30rem;">
+              <ol class="carousel-indicators">
+                <li data-target="#carousel_post_img<%= post.id %>" data-slide-to="0" class="active"></li>
+                <% post.post_images.drop(1).count.times do |index| %>
+                  <li data-target="#carousel_post_img<%= post.id %>" data-slide-to="#{index}"></li>
+                <% end %>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <% post.post_images.first(1).each do |image| %>
+                    <%= image_tag image, class: "carousel_image w-100" %>
+                  <% end %>
+                </div>
+                <% post.post_images.drop(1).each do |image| %>
+                  <div class="carousel-item">
+                    <%= image_tag image, class: "carousel_image  w-100" %>
+                  </div>
+                <% end %>
+              </div>
+              <a class="carousel-control-prev" href="#carousel_post_img<%= post.id %>" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carousel_post_img<%= post.id %>" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
+            <!--carouselスライドショーここまで-->
             <div class="card-body">
               <div id="favorite_buttons_<%= post.id %>">
           　　  　<%= render "public/sns_favorites/favorites", post: post %>

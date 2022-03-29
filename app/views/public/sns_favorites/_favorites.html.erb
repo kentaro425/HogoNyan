@@ -5,7 +5,7 @@
   <p>いいね<%= post.sns_favorites.count %>件</p>
 <% else %>
   <%= link_to post_sns_favorites_path(post), method: :post, remote: true do %>
-    <p></p><i class="fas fa-paw text-secondary fa-lg"></i>
+    <p></p><i class="fas fa-paw text-secondary fa-lg shadow"></i>
   <% end %>
   <p>いいね<%= post.sns_favorites.count %>件</p>
 <% end %>
