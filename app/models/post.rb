@@ -8,6 +8,9 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   has_many_attached :post_images
 
+  validates :body, presence: true
+  validates :post_images, presence: true
+
   def favorited_by?(user)
     sns_favorites.where(user_id: user).exists?
   end

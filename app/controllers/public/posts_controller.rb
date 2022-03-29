@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :edit, :destroy]
   before_action :search_product, only: [:index, :show, :search]
 
   def new
