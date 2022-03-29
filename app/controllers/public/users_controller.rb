@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :edit, :requester_edit, :sns_edit, :update, : ]
+  before_action :authenticate_user!, only: [:show, :edit, :requester_edit, :sns_edit, :update ]
   before_action :set_user, only: [:show, :requester_show, :sns_show, :edit, :requester_edit, :sns_edit, :update, :requester_update, :sns_update, :favorites, :sns_favorites]
 
   def show
