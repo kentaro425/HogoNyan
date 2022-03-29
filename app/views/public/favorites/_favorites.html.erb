@@ -1,9 +1,9 @@
 <% if request.favorited_by?(current_user) %>
-  <%= link_to request_favorites_path(request), method: :delete, remote: true, class: "badge badge-info" do %>
-    <i class="fas fa-star"></i>登録済み
+  <%= link_to request_favorites_path(request), method: :delete, remote: true, class: "badge badge-light shadow-sm border" do %>
+    <i class="fas fa-star text-warning"></i>登録済み
   <% end %>
 <% else %>
-  <%= link_to request_favorites_path(request), method: :post, remote: true, class: "badge badge-info" do %>
+  <%= link_to request_favorites_path(request), method: :post, remote: true, class: "badge badge-light shadow-sm border" do %>
     <i class="far fa-star"></i>お気に入り
   <% end %>
 <% end %>

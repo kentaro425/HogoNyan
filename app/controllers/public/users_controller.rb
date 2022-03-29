@@ -9,6 +9,7 @@ class Public::UsersController < ApplicationController
   end
 
   def requester_show
+    @requests = @user.requests.page(params[:page]).per(6)
   end
 
   def sns_show
@@ -67,7 +68,7 @@ class Public::UsersController < ApplicationController
   def favorites
     favorites = Favorite.where(user_id: @user.id).pluck(:request_id)
     favorite_requests = Request.find(favorites)
-    @favorite_requests = Kaminari.paginate_array(favorite_requests).page(params[:page]).per(10)
+    @favorite_requests = Kaminari.paginate_array(favorite_requests).page(params[:page]).per(8)
   end
 
   def sns_favorites

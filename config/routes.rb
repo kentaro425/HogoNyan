@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
     root 'posts#index'
     get 'homes/about', as: 'about'
-    get 'homes/top'
+    get 'homes/top', as: 'top'
 
     resources :posts do
       collection do
