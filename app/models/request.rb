@@ -6,6 +6,21 @@ class Request < ApplicationRecord
   has_many :user_rooms, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many_attached :request_images
+
+  validates :user_id, presence: true
+  validates :prefecture_id, presence: true
+  validates :status, presence: true
+  validates :title, presence: true
+  validates :breed, presence: true
+  validates :size, presence: true
+  validates :sex, presence: true
+  validates :age, presence: true
+  validates :vaccine, presence: true
+  validates :surgery, presence: true
+  validates :pattern, presence: true
+  validates :information, presence: true
+
+
   enum breed: {
     雑種: 0, マンチカン: 1, ミヌエット: 2, アメリカンショートヘア: 3,
   }
