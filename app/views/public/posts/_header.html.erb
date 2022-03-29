@@ -38,6 +38,11 @@ header {
             <i class="fas fa-h-square fa-2x text-brown"></i>
           <% end %>
         </li>
+        <li>
+          <%= link_to new_user_registration_path,class: "mx-2 nav-link", 'data-toggle': :'tooltip', 'title': :'新規登録' do %>
+            <i class="fas fa-sign-in-alt fa-2x text-brown"></i>
+          <% end %>
+        </li>
       <% end %>
     </ul>
   </div>

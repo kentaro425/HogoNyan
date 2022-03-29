@@ -11,7 +11,7 @@
           <%= link_to admin_user_path(visiter) do %>
             <%#= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
             <strong>
-              <%= visiter.last_name + visiter.first_name %>
+              <%= visiter.last_name %><%= visiter.first_name %>
             </strong>
           <% end %>
           さんが

@@ -1,4 +1,5 @@
 class Public::RequestsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :inquiry, :edit, :update, :destroy]
   before_action :search_product, only: [:index, :search]
 
   def new
@@ -16,6 +17,7 @@ class Public::RequestsController < ApplicationController
       flash[:notice] = "投稿を作成しました"
       redirect_to request_path(@request)
     else
+      flash[:alert] = "必要事項を入力してください"
       render :new
     end
   end
@@ -63,6 +65,7 @@ class Public::RequestsController < ApplicationController
       flash[:notice] = "編集しました"
       redirect_to request_path
     else
+      flash[:alert] = "必要事項を入力してください"
       render :edit
     end
   end

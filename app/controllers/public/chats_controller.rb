@@ -8,6 +8,7 @@ class Public::ChatsController < ApplicationController
       flash[:notice] = "メッセージを送信しました"
       redirect_to request.referer
     else
+      flash[:alert] = "送信に失敗しました"
       redirect_to room_path(@chat.room_id)
     end
   end
