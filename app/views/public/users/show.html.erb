@@ -1,23 +1,23 @@
-<div class="container-fuild">
+<div class="container-fuild my-5">
   <h4 class="d-flex justify-content-center mb-4"><%= @user.nickname %> さまのマイページ</h4>
   <div class="row">
     <div class="col-md-2 ml-auto">
       <% if @user == current_user %>
-      <table class="table bg-cream">
+      <table class="table text-brown">
         <tr>
-          <td><%= link_to "会員情報の編集", edit_user_path, class: "text-decoration-none" %></td>
+          <td class="shadow-sm"><%= link_to "会員情報の編集", edit_user_path, class: "text-decoration-none text-brown" %></td>
         </tr>
         <tr>
-          <td><%= link_to "お気に入り一覧", favorites_user_path %></td>
+          <td class="shadow-sm"><%= link_to "お気に入り一覧", favorites_user_path, class: "text-decoration-none text-brown" %></td>
         </tr>
         <tr>
-          <td><%= link_to "お問い合わせ一覧", rooms_path %></td>
+          <td class="shadow-sm"><%= link_to "お問い合わせ一覧", rooms_path, class: "text-decoration-none text-brown" %></td>
         </tr>
         <tr>
-          <td><%= link_to "保護猫を掲載したい方のメニューに切り替える", requester_home_user_path %></td>
+          <td class="shadow-sm"><%= link_to "保護猫を掲載したい方のメニューに切り替える", requester_home_user_path, class: "text-decoration-none text-brown" %></td>
         </tr>
         <tr>
-          <td><%= link_to "退会手続き", unsubscribe_user_path %></td>
+          <td class="shadow-sm"><%= link_to "退会手続き", unsubscribe_user_path, class: "text-decoration-none text-brown" %></td>
         </tr>
       </table>
       <% end %>

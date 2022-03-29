@@ -24,7 +24,7 @@
             <% visited = notification.visited %>
             <%= link_to admin_user_path(visited) do %>
               <strong>
-                <%= visited.last_name + visited.first_name %>
+                <%= visited.last_name %><%= visited.first_name %>
               </strong>
             <% end %>
             さんとの
