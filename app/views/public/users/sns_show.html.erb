@@ -5,7 +5,7 @@
       <% if @user.sns_image.attached? %>
         <%= image_tag @user.sns_image, size: "130x130", class: "rounded-circle img-thumbnail" %>
       <% else %>
-        <%= image_tag asset_path('no_image.jpeg'), size: "130x130", class: "rounded-circle img-thumbnail" %>
+        <%= image_tag asset_path('no_image.jpg'), size: "130x130", class: "rounded-circle img-thumbnail" %>
       <% end %>
     </div>
     <div class="col-md-6 mt-2">

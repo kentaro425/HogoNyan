@@ -18,7 +18,7 @@
                 <% if post.user.sns_image.attached? %>
                   <%= image_tag post.user.sns_image, size: '50x50', class: "rounded-circle img-thumbnail m-1" %>
                 <% else %>
-                  <%= image_tag asset_path('no_image.jpeg'), size: '50x50', class: "rounded-circle img-thumbnail my-1 mx-2" %>
+                  <%= image_tag asset_path('no_image.jpg'), size: '50x50', class: "rounded-circle img-thumbnail my-1 mx-2" %>
                 <% end %>
                 <%= post.user.nickname %>
               <% end %>

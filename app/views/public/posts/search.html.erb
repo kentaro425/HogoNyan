@@ -17,7 +17,7 @@
                 <% if result.user.sns_image.attached? %>
                   <%= image_tag result.user.sns_image, size: '50x50', class: "rounded-circle img-thumbnail p-3" %>
                 <% else %>
-                  <%= image_tag asset_path('no_image.jpeg'), size: '50x50', class: "rounded-circle img-thumbnail p-3" %>
+                  <%= image_tag asset_path('no_image.jpg'), size: '50x50', class: "rounded-circle img-thumbnail p-3" %>
                 <% end %>
                 <%= result.user.nickname %>
               <% end %>

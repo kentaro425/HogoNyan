@@ -67,7 +67,7 @@
           <% if @user.requester_image.attached? %>
           <td><%= image_tag @user.requester_image, class: "w-25" %></td>
           <% else %>
-            <td><%= image_tag asset_path('no_image.jpeg'), class: "w-25" %></td>
+            <td><%= image_tag asset_path('no_image.jpg'), class: "w-25" %></td>
           <% end %>
         </tr>
         <tr>
@@ -93,7 +93,7 @@
           <% if @user.sns_image.attached? %>
           <td><%= image_tag @user.sns_image, class: "w-25" %></td>
           <% else %>
-            <td><%= image_tag asset_path('no_image.jpeg'), class: "w-25" %></td>
+            <td><%= image_tag asset_path('no_image.jpg'), class: "w-25" %></td>
           <% end %>
         </tr>
         <tr>
