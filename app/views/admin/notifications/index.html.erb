@@ -21,13 +21,13 @@
           <% when 'user_status' then %>
             募集者ステータスを変更しました。
           <% when 'complete' then %>
-            <% visited = notification.visited %>
-            <%= link_to admin_user_path(visited) do %>
-              <strong>
-                <%= visited.last_name %><%= visited.first_name %>
-              </strong>
-            <% end %>
-            さんとの
+            <!--<%# visited = notification.visited %>-->
+            <!--<%#= link_to admin_user_path(visited) do %>-->
+            <!--  <strong>-->
+            <!--    <%#= visited.last_name %><%= visited.first_name %>-->
+            <!--  </strong>-->
+            <!--<%# end %>-->
+            <!--さんとの-->
             <%= link_to "取引", notification.request %>
             を完了しました。
         <% end %>

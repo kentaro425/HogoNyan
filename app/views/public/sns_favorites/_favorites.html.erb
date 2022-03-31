@@ -1,11 +1,11 @@
 <% if post.favorited_by?(current_user) %>
   <%= link_to post_sns_favorites_path(post), method: :delete, remote: true do %>
-    <p></p><i class="fas fa-paw text-pink fa-lg"></i>
+    <p></p></i><i class="fas fa-heart text-pink fa-lg"></i>
   <% end %>
   <p>いいね<%= post.sns_favorites.count %>件</p>
 <% else %>
   <%= link_to post_sns_favorites_path(post), method: :post, remote: true do %>
-    <p></p><i class="fas fa-paw text-secondary fa-lg shadow"></i>
+    <p></p></i><i class="far fa-heart fa-lg"></i>
   <% end %>
   <p>いいね<%= post.sns_favorites.count %>件</p>
 <% end %>

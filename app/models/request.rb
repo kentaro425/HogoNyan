@@ -49,6 +49,18 @@ class Request < ApplicationRecord
     favorites.where(user_id: user).exists?
   end
 
+  def create_notification_complete!(current_user)
+    temp = Notification.where(["visiter_id = ? and visited_id = ? and request_id = ? and action = ? ", current_user.id, nil, id, 'complete'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        request_id: id,
+        action: 'complete'
+      )
+      notification.save if notification.valid?
+    end
+  end
+
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :region, through: :prefecture

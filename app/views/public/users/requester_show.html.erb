@@ -1,7 +1,7 @@
 <div class="container-fuild my-5">
   <h4 class="d-flex justify-content-center mb-4"><%= @user.nickname %> さまの募集者用マイページ</h4>
   <div class="row">
-    <div class="col-md-2 ml-auto">
+    <div class="col-lg-2 ml-auto">
       <% if @user == current_user %>
       <table class="table  text-brown">
         <tr>
@@ -25,7 +25,7 @@
       </table>
       <% end %>
     </div>
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <div class="d-flex justify-content-center">
       <h5>募集一覧</h5><h5>(全<%= @requests.count %>)件</h5>
       </div>

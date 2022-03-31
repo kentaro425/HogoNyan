@@ -30,7 +30,7 @@
 }
 
 .text-pink {
-  color: #F4BAE4;
+  color: #FF66C4;
 }
 
 .post-index-imag {
@@ -71,4 +71,40 @@ main {
   background-size: cover;
   background-position: center 30%;
   height: 50vh;
+}
+
+.main-visual {
+  background-image: image-url("main_visual.jpg");
+  background-size: cover;
+  background-position: center 20%;
+  height: 60vh;
+}
+
+.main-visual-head {
+  padding-top: 25vh;
+  padding-left: 10vh;
+  color: white;
+}
+
+.main-visual-text {
+  color: white;
+  padding-left: 15vh;
+  margin-top: 5vh;
+}
+
+
+@media screen and (max-width: 767px) {
+  .main-visual {
+    background-image: image-url("main_visual2.jpg");
+  }
+
+  .main-visual-head {
+    padding-left: 0;    padding: 0 auto;
+    font-size: 32px;
+  }
+
+  .main-visual-text {
+    padding-left: 0;
+    font-size: 12px;
+  }
 }

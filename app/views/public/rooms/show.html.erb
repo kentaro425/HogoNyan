@@ -37,6 +37,17 @@
       </div>
     </div>
   </div>
+  <% if @request.user == current_user %>
+    <div class="row">
+      <div class="col-3 ml-auto">
+        <%= form_with model: @request, url: request_path, local: true, class: "input-group"  do |f| %>
+          <%= f.select :status, Request.statuses.keys, class: "form-control" %>
+          <%= f.hidden_field :id, value: @request.id %>
+          <%= f.submit "更新", class: "btn btn-outline-success" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   <div class="row">
     <div class="col-9 mx-auto bg-light shadow">
       <% @chats.each do |chat| %>

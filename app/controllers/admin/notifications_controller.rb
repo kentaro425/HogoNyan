@@ -1,6 +1,6 @@
 class Admin::NotificationsController < ApplicationController
   def index
-    @notifications = Notification.page(params[:page]).per(20).where(action: 'user_status')
+    @notifications = Notification.page(params[:page]).per(20).where(action: ['user_status', 'complete'])
   end
 
   def destroy
@@ -10,7 +10,7 @@ class Admin::NotificationsController < ApplicationController
   end
 
   def destroy_all
-    @notifications = Notification.page(params[:page]).per(20).where(action: 'user_status')
+    @notifications = Notification.page(params[:page]).per(20).where(action: ['user_status', 'complete'])
     @notifications.destroy_all
     redirect_to request.referer
   end
