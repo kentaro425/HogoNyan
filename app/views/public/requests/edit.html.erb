@@ -8,6 +8,10 @@
           <%= f.text_field :title, class: "form-control" %>
         </div>
         <div class="form-group">
+          <%= f.label :募集状況 %><br>
+          <%= f.select :status, Request.statuses.keys, {prompt: "選択してください"}, class: "form-control" %>
+        </div>
+        <div class="form-group">
           <%= f.label :猫種 %><br>
           <%= f.select :breed, Request.breeds.keys, {prompt: "選択してください"}, class: "form-control" %>
         </div>
@@ -60,7 +64,7 @@
           <%= f.file_field :request_images, multiple: true %>
         </div>
         <div class="form-group">
-          <%= f.label :詳細情報 %><%= f.text_area :information, value: text_information, rows: 20, class:"form-control" %>
+          <%= f.label :詳細情報 %><%= f.text_area :information, rows: 20, class:"form-control" %>
         </div>
         <% if @request.request_images.present? %>
             <p>現在登録されている画像（削除するものはチェックしてください）</p>

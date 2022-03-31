@@ -63,6 +63,9 @@ class Public::RequestsController < ApplicationController
     end
     if request.update(request_params)
       flash[:notice] = "編集しました"
+      if request.status == "里親決定済"
+        request.create_notification_complete!(current_user)
+      end
       redirect_to request_path
     else
       flash[:alert] = "必要事項を入力してください"
@@ -88,6 +91,6 @@ class Public::RequestsController < ApplicationController
   end
 
   def request_params
-    params.require(:request).permit(:user_id, :prefecture_id, :title, :breed, :size, :sex, :age, :vaccine, :surgery, :pattern, :information, request_images: [])
+    params.require(:request).permit(:user_id, :prefecture_id, :title, :breed, :size, :sex, :age, :vaccine, :surgery, :pattern, :information, :status, request_images: [])
   end
 end

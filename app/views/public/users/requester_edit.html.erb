@@ -1,7 +1,7 @@
 <div class="container my-5">
   <div class="row">
-    <div class="col-md-4 mx-auto">
-      <h3>募集者情報編集</h3>
+    <div class="col-8 col-md-4 mx-auto">
+      <h4>募集者情報編集</h4>
       <%= form_with model: @user, url: requester_update_user_path, method: :patch, local: true  do |f| %>
         <div class="row">
           <%= f.label :会員種別 %>

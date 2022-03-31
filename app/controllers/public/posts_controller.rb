@@ -20,7 +20,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.page(params[:page]).per(4)
+    @posts = Post.page(params[:page]).per(4).order(created_at: :desc)
     @comment = Comment.new
   end
 

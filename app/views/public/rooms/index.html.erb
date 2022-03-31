@@ -5,7 +5,9 @@
         <table class="table shadow-sm">
           <tr>
             <therd>
-              <th colspan=4></th>
+              <th colspan=2>募集タイトル</th>
+              <th>名前</th>
+              <th>最新メッセージ</th>
             </therd>
           </tr>
           <% @another_user_rooms.each do |room| %>
@@ -20,7 +22,7 @@
                 <%= room.request.title %>
               <% end %>
             </td>
-            <td class="align-middle"><%= room.user.nickname %></td>
+            <td class="align-middle"><%= room.user.last_name %> <%= room.user.first_name %></td>
             <td class="align-middle text-nowrap">
               <% if room.room.chats.present? %>
                 <%= Chat.find_by(id: room.room.chat_ids.last).content %>
