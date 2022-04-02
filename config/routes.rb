@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       end
       member do
         get "inquiry"
+        patch "status_update"
       end
 
       resource :favorites, only: [:create, :destroy]

@@ -63,13 +63,30 @@ class Public::RequestsController < ApplicationController
     end
     if request.update(request_params)
       flash[:notice] = "編集しました"
-      if request.status == "里親決定済"
-        request.create_notification_complete!(current_user)
-      end
       redirect_to request_path
     else
       flash[:alert] = "必要事項を入力してください"
       render :edit
+    end
+  end
+
+  def status_update
+    @request = Request.find(params[:request][:id])
+    if @request.update(status: params[:request][:status])
+      flash[:notice] = "変更しました"
+      if @request.status == "里親決定済"
+        # 取引完了通知
+        temp = Notification.where(["visiter_id = ? and visited_id = ? and request_id = ? and action = ? ", current_user.id, params[:request][:visited_id], params[:request][:id], 'complete'])
+        if temp.blank?
+          notification = current_user.active_notifications.new(
+            visited_id: params[:request][:visited_id],
+            request_id: params[:request][:id],
+            action: 'complete'
+          )
+          notification.save if notification.valid?
+        end
+      end
+      redirect_to room_path(params[:id])
     end
   end
 
