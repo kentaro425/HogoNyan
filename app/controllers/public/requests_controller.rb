@@ -1,6 +1,7 @@
 class Public::RequestsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :inquiry, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index, :search]
   before_action :search_product, only: [:index, :search]
+  before_action :ensure_currect_user, only: [:update, :edit, :destroy]
 
   def new
     @request = Request.new
@@ -106,6 +107,14 @@ class Public::RequestsController < ApplicationController
     @p = Request.ransack(params[:q])  # 検索オブジェクトを生成
     @results = @p.result.page(params[:page]).per(10)
   end
+
+  def ensure_currect_user
+    @request = Request.find(params[:id])
+    unless @request.user == current_user
+      redirect_to requests_path
+    end
+  end
+
 
   def request_params
     params.require(:request).permit(:user_id, :prefecture_id, :title, :breed, :size, :sex, :age, :vaccine, :surgery, :pattern, :information, :status, request_images: [])

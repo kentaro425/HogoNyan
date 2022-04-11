@@ -1,5 +1,5 @@
 class Public::RelationshipsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!
   def followings
     user = User.find(params[:user_id])
     @users = user.followings
