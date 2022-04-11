@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :edit, :destroy]
+  before_action :authenticate_user!, except: [:show, :index, :search]
   before_action :search_product, only: [:index, :show, :search]
+  before_action :ensure_currect_user, only: [:update, :edit, :destroy]
 
   def new
     @post = Post.new
@@ -76,6 +77,13 @@ class Public::PostsController < ApplicationController
   def search_product
     @p = Post.ransack(params[:q])  # 検索オブジェクトを生成
     @results = @p.result
+  end
+
+  def ensure_currect_user
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      redirect_to posts_path
+    end
   end
 
   def post_params

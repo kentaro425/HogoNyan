@@ -1,5 +1,7 @@
 class Public::RoomsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_currect_user, only: [:show]
+
   def create
     room = Room.create
     @current_user_room = UserRoom.create(user_id: current_user.id, room_id: room.id, request_id: params[:room][:request_id])
@@ -26,5 +28,15 @@ class Public::RoomsController < ApplicationController
     @user_rooms = @room.user_rooms
     @another_user_room = @user_rooms.where.not(user_id: current_user.id).first
     @request = Request.find(@another_user_room.request_id)
+  end
+
+  private
+
+  def ensure_currect_user
+    @room = Room.find(params[:id])
+    @user_room = @room.user_rooms.where(user_id: current_user.id).first
+    unless @user_room
+      redirect_to rooms_path
+    end
   end
 end

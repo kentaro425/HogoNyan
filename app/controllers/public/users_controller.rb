@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :edit, :requester_edit, :sns_edit, :update ]
+  before_action :authenticate_user!, except: [:requester_show, :sns_show, :search]
   before_action :set_user, only: [:show, :requester_show, :sns_show, :edit, :requester_edit, :sns_edit, :update, :requester_update, :sns_update, :favorites, :sns_favorites]
+  before_action :ensure_currect_user, only: [:show, :edit, :requester_edit, :sns_edit, :update, :sns_update, :requester_update, :unsubscribe, :withdraw]
 
   def show
     favorites = Favorite.where(user_id: @user.id).pluck(:request_id)
@@ -79,6 +80,14 @@ class Public::UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
+  def ensure_currect_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to posts_path
+    end
+  end
+
 
   def user_params
     params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :postal_code, :address, :phone, :nickname, :profile, :sns_image)
